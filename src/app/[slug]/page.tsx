@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface BlogPageProps {
   params: {
     slug: string;
@@ -72,7 +74,7 @@ export default function BlogPage({ params }: BlogPageProps) {
         </h3>
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div className="p-4 border border-gray-200 rounded-lg">
-            <img
+            <Image
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
@@ -85,7 +87,7 @@ export default function BlogPage({ params }: BlogPageProps) {
             </div>
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
-            <img
+            <Image
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
@@ -98,7 +100,7 @@ export default function BlogPage({ params }: BlogPageProps) {
             </div>
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
-            <img
+            <Image
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
