@@ -11,7 +11,6 @@ export const Card = ({ title, date, author, readingTime }: CardProps) => {
     <div className="p-4 border border-gray-200 rounded-lg">
       <Image
         alt="Placeholder image"
-        // wider than taller
         src={"https://via.placeholder.com/850x500"}
         width={850}
         height={500}
