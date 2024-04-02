@@ -72,9 +72,11 @@ export default function BlogPage({ params }: BlogPageProps) {
         <h3 className="text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-4">
           Related
         </h3>
-        <div className="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid md:grid-cols-3 gap-4 mt-4">
           <div className="p-4 border border-gray-200 rounded-lg">
             <Image
+              width={850}
+              height={500}
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
@@ -88,6 +90,8 @@ export default function BlogPage({ params }: BlogPageProps) {
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
             <Image
+              width={850}
+              height={500}
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
@@ -101,6 +105,8 @@ export default function BlogPage({ params }: BlogPageProps) {
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
             <Image
+              width={850}
+              height={500}
               alt="Placeholder image"
               src={"https://via.placeholder.com/850x500"}
               className="rounded-lg mb-4 w-full"
