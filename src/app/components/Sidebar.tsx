@@ -1,40 +1,45 @@
-const recentPosts = [
+import Link from "next/link";
+
+const categories = [
   {
     id: 1,
-    title: "Post 1",
-    content: "This is the first post",
+    title: "React",
   },
   {
     id: 2,
-    title: "Post 2",
-    content: "This is the second post",
+    title: "Next.js",
   },
   {
     id: 3,
-    title: "Post 3",
-    content: "This is the third post",
+    title: "Tailwind CSS",
   },
   {
     id: 4,
-    title: "Post 4",
-    content: "This is the fourth post",
+    title: "TypeScript",
   },
   {
     id: 5,
-    title: "Post 5",
-    content: "This is the fifth post",
+    title: "GraphQL",
+  },
+  {
+    id: 6,
+    title: "Node.js",
   },
 ];
 
 export const Sidebar = () => {
   return (
     <div className="lg:w-1/4 p-6 border border-gray-200 rounded-lg">
-      <h2 className="text-xl font-semibold">Recent Posts</h2>
+      <h2 className="text-xl font-semibold">Categories</h2>
       <ul className="mt-2">
-        {recentPosts.map((post) => (
-          <li key={post.id} className="mb-2">
-            <h3 className="text-lg font-semibold">{post.title}</h3>
-            <p>{post.content}</p>
+        {categories.map((category) => (
+          <li key={category.id} className="mt-2">
+            <Link
+              href={`/categories/${category.id}`}
+              className="text-blue-500 hover:underline"
+            >
+              {category.title}
+            </Link>
           </li>
         ))}
       </ul>
