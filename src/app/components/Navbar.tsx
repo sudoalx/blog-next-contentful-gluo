@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export const Navbar = () => {
@@ -5,9 +6,16 @@ export const Navbar = () => {
     <nav className="p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold">
-          Gluo Dev Blog
+          <Image
+            src="/images/logo.png"
+            alt="logo"
+            width={150}
+            height={150}
+            // responsive image
+            className="object-contain w-24 sm:w-28"
+          />
         </Link>
-        <ul className="flex space-x-4">
+        <ul className="hidden space-x-4 sm:flex">
           <li>
             <Link href="#" className="">
               Home
