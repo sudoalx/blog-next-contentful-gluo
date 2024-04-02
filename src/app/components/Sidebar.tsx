@@ -28,7 +28,7 @@ const recentPosts = [
 
 export const Sidebar = () => {
   return (
-    <div className="w-1/4 p-6 border border-gray-200 rounded-lg">
+    <div className="lg:w-1/4 p-6 border border-gray-200 rounded-lg">
       <h2 className="text-xl font-semibold">Recent Posts</h2>
       <ul className="mt-2">
         {recentPosts.map((post) => (

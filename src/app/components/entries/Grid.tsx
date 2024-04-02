@@ -65,8 +65,8 @@ const posts = [
 
 export const Grid = () => {
   return (
-    <div className="w-3/4 p-4 border border-gray-200 rounded-lg">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="w-full lg:w-3/4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Card
             key={post.title}

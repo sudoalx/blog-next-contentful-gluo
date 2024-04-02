@@ -3,10 +3,9 @@ import { Sidebar } from "./components";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="container mx-auto min-h-screen">
       {/* Grid of articles and sidebar */}
-      {/* sidebar column should take up a fourth of the screen */}
-      <div className="container mx-auto p-4 flex justify-between w-4/6">
+      <div className="p-4 flex flex-col lg:flex lg:flex-row gap-2">
         <Grid />
         <Sidebar />
       </div>
