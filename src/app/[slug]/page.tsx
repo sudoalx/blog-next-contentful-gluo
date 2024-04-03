@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ShareButtons } from "../components/share-bar/ShareButtons";
 import { TagPills } from "../components/tags/TagPills";
 
@@ -9,7 +8,7 @@ interface BlogPageProps {
   };
 }
 
-export default function BlogPage({ params }: BlogPageProps) {
+export default function BlogPage({ params }: Readonly<BlogPageProps>) {
   // decode the slug
   const decodedSlug = decodeURIComponent(params.slug.replace(/-/g, " "));
   return (
