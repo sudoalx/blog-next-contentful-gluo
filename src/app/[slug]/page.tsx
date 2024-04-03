@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ShareButtons } from "../components/share-bar/ShareButtons";
+import { TagPills } from "../components/tags/TagPills";
 
 interface BlogPageProps {
   params: {
@@ -7,11 +10,33 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ params }: BlogPageProps) {
-  // deencode the slug
+  // decode the slug
   const decodedSlug = decodeURIComponent(params.slug.replace(/-/g, " "));
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold">{decodedSlug}</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2">
+        <div>
+          <h1 className="text-4xl font-bold">{decodedSlug}</h1>
+          <div className="flex gap-8 mt-4 text-sm text-gray-500">
+            <p className="text-sm text-gray-500">2024-04-01</p>
+            <p className="text-sm text-gray-500">Author: John Doe</p>
+            <p className="text-sm text-gray-500">5 min read</p>
+          </div>
+          <div>
+            <TagPills />
+          </div>
+          <ShareButtons title={decodedSlug} />
+        </div>
+        <div className="flex justify-end">
+          <Image
+            width={650}
+            height={300}
+            alt="Placeholder image"
+            src={"https://via.placeholder.com/650x300"}
+            className="rounded-lg"
+          />
+        </div>
+      </div>
       <p className="text-lg mt-4">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur error
         voluptates dolor itaque, rerum, ducimus quisquam illo quae esse iure
