@@ -16,7 +16,7 @@ interface ShareButtonsProps {
 }
 
 export const ShareButtons = ({
-  url = window.location.href,
+  url = "https://example.com",
   title,
 }: ShareButtonsProps) => {
   return (

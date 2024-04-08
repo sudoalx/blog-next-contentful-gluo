@@ -1,6 +1,5 @@
 import { draftMode } from "next/headers";
 import { fetchBlogPosts } from "../../../contentful/blogPosts";
-import Link from "next/link";
 import { Card } from "./Card";
 
 export const Grid = async () => {
@@ -19,6 +18,7 @@ export const Grid = async () => {
             author="John Doe"
             readingTime="5 min"
             slug={post.slug}
+            image={post.image!}
           />
         ))}
       </div>
