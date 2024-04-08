@@ -6,11 +6,12 @@ interface CardProps {
   date: string;
   author: string;
   readingTime: string;
+  slug: string;
 }
-export const Card = ({ title, date, author, readingTime }: CardProps) => {
+export const Card = ({ title, date, author, readingTime, slug }: CardProps) => {
   return (
     <div className="p-4 border border-gray-200 rounded-lg">
-      <Link href={title.replaceAll(" ", "-")}>
+      <Link href={slug}>
         <Image
           alt="Placeholder image"
           src={"https://via.placeholder.com/850x500"}
