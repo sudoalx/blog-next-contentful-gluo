@@ -7,16 +7,35 @@ interface CardProps {
   author: string;
   readingTime: string;
   slug: string;
+  image: {
+    src: string;
+    alt: string;
+    height: number;
+    width: number;
+  };
 }
-export const Card = ({ title, date, author, readingTime, slug }: CardProps) => {
+
+export const Card = ({
+  title,
+  date,
+  author,
+  readingTime,
+  slug,
+  image = {
+    src: "https://via.placeholder.com/850x500",
+    alt: "Placeholder image",
+    height: 500,
+    width: 850,
+  },
+}: CardProps) => {
   return (
     <div className="p-4 border border-gray-200 rounded-lg">
       <Link href={slug}>
         <Image
-          alt="Placeholder image"
-          src={"https://via.placeholder.com/850x500"}
-          width={850}
-          height={500}
+          src={`https:${image.src}`}
+          alt={image.alt}
+          height={image.height}
+          width={image.width}
           className="rounded-lg mb-4 w-full"
         />
         <h2 className="text-xl font-semibold">{title}</h2>
