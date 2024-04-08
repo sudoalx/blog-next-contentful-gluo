@@ -1,96 +1,99 @@
+import { Metadata, ResolvingMetadata } from "next";
+import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
+import { fetchBlogPost, fetchBlogPosts } from "../../contentful/blogPosts";
+import Link from "next/link";
+import RichText from "../../contentful/RichText";
 import Image from "next/image";
 import { ShareButtons } from "../components/share-bar/ShareButtons";
 import { TagPills } from "../components/tags/TagPills";
 
-interface BlogPageProps {
-  params: {
-    slug: string;
+interface BlogPostPageParams {
+  slug: string;
+}
+
+interface BlogPostPageProps {
+  params: BlogPostPageParams;
+}
+
+// Tell Next.js about all our blog posts so
+// they can be statically generated at build time.
+export async function generateStaticParams(): Promise<BlogPostPageParams[]> {
+  const blogPosts = await fetchBlogPosts({ preview: false });
+
+  return blogPosts.map((post) => ({ slug: post.slug }));
+}
+
+// For each blog post, tell Next.js which metadata
+// (e.g. page title) to display.
+export async function generateMetadata(
+  { params }: BlogPostPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const blogPost = await fetchBlogPost({
+    slug: params.slug,
+    preview: draftMode().isEnabled,
+  });
+
+  if (!blogPost) {
+    return notFound();
+  }
+
+  return {
+    title: blogPost.title,
   };
 }
 
-export default function BlogPage({ params }: Readonly<BlogPageProps>) {
-  // decode the slug
-  const decodedSlug = decodeURIComponent(params.slug.replace(/-/g, " "));
+export default async function BlogPage({
+  params,
+}: Readonly<BlogPostPageProps>) {
+  // Fetch a single blog post by slug,
+  // using the content preview if draft mode is enabled:
+  const blogPost = await fetchBlogPost({
+    slug: params.slug,
+    preview: draftMode().isEnabled,
+  });
+
+  if (!blogPost) {
+    // If a blog post can't be found,
+    // tell Next.js to render a 404 page.
+    return notFound();
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2">
         <div>
-          <h1 className="text-4xl font-bold">{decodedSlug}</h1>
+          {/* The blog post title */}
+          <h1 className="text-4xl font-bold">{blogPost.title}</h1>
+          {/* The blog post metadata */}
           <div className="flex gap-8 mt-4 text-sm text-gray-500">
             <p className="text-sm text-gray-500">2024-04-01</p>
             <p className="text-sm text-gray-500">Author: John Doe</p>
             <p className="text-sm text-gray-500">5 min read</p>
           </div>
           <div>
+            {/* The tags for the blog post */}
             <TagPills />
           </div>
-          <ShareButtons title={decodedSlug} />
+          {/* The share buttons */}
+          <ShareButtons title={blogPost.slug} />
         </div>
         <div className="flex justify-end">
-          <Image
-            width={650}
-            height={300}
-            alt="Placeholder image"
-            src={"https://via.placeholder.com/650x300"}
-            className="rounded-lg"
-          />
+          {blogPost.image && (
+            <Image
+              width={850}
+              height={500}
+              alt={blogPost.image.alt}
+              src={`https:${blogPost.image.src}`}
+              className="rounded-lg"
+            />
+          )}
         </div>
       </div>
-      <p className="text-lg mt-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur error
-        voluptates dolor itaque, rerum, ducimus quisquam illo quae esse iure
-        nulla officiis fuga quia deserunt corporis, cumque quibusdam repellendus
-        illum? Tenetur illo dolor veritatis ea dolore ipsum, corrupti nisi
-        laudantium cum fuga sint debitis soluta accusantium quae ullam accusamus
-        aliquid omnis officiis blanditiis corporis! Aut excepturi voluptatibus
-        sequi maiores veniam. Est ipsum at excepturi perferendis, blanditiis
-        maiores, magni numquam deleniti sit labore reprehenderit soluta in
-        obcaecati illum laudantium laborum sint eligendi quam distinctio.
-        Blanditiis, esse laborum! Nulla exercitationem laboriosam inventore.
-        Doloremque quis culpa tempora distinctio similique accusantium illo
-        laborum accusamus, nisi doloribus deleniti, eaque suscipit! Ipsum qui
-        laboriosam blanditiis! Aliquam veniam, corporis similique possimus
-        veritatis reiciendis quod ea ipsam! Cupiditate?
-      </p>
-      <h2 className="text-2xl font-semibold mt-8 border-b border-gray-200 pb-4">
-        Lorem ipsum dolor
-      </h2>
-      <p className="text-lg mt-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur error
-        voluptates dolor itaque, rerum, ducimus quisquam illo quae esse iure
-        nulla officiis fuga quia deserunt corporis, cumque quibusdam repellendus
-        illum? Tenetur illo dolor veritatis ea dolore ipsum, corrupti nisi
-        laudantium cum fuga sint debitis soluta accusantium quae ullam accusamus
-        aliquid omnis officiis blanditiis corporis! Aut excepturi voluptatibus
-        sequi maiores veniam. Est ipsum at excepturi perferendis, blanditiis
-        maiores, magni numquam deleniti sit labore reprehenderit soluta in
-        obcaecati illum laudantium laborum sint eligendi quam distinctio.
-        Blanditiis, esse laborum! Nulla exercitationem laboriosam inventore.
-        Doloremque quis culpa tempora distinctio similique accusantium illo
-        laborum accusamus, nisi doloribus deleniti, eaque suscipit! Ipsum qui
-        laboriosam blanditiis! Aliquam veniam, corporis similique possimus
-        veritatis reiciendis quod ea ipsam! Cupiditate?
-      </p>
-
-      <h2 className="text-2xl font-semibold mt-8 border-b border-gray-200 pb-4">
-        Lorem ipsum dolor
-      </h2>
-      <p className="text-lg mt-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur error
-        voluptates dolor itaque, rerum, ducimus quisquam illo quae esse iure
-        nulla officiis fuga quia deserunt corporis, cumque quibusdam repellendus
-        illum? Tenetur illo dolor veritatis ea dolore ipsum, corrupti nisi
-        laudantium cum fuga sint debitis soluta accusantium quae ullam accusamus
-        aliquid omnis officiis blanditiis corporis! Aut excepturi voluptatibus
-        sequi maiores veniam. Est ipsum at excepturi perferendis, blanditiis
-        maiores, magni numquam deleniti sit labore reprehenderit soluta in
-        obcaecati illum laudantium laborum sint eligendi quam distinctio.
-        Blanditiis, esse laborum! Nulla exercitationem laboriosam inventore.
-        Doloremque quis culpa tempora distinctio similique accusantium illo
-        laborum accusamus, nisi doloribus deleniti, eaque suscipit! Ipsum qui
-        laboriosam blanditiis! Aliquam veniam, corporis similique possimus
-        veritatis reiciendis quod ea ipsam! Cupiditate?
-      </p>
+      <div className="text-lg mt-4">
+        <RichText document={blogPost.body} />
+      </div>
 
       <div>
         <h3 className="text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-4">
