@@ -11,8 +11,14 @@ type BlogPostEntry = Entry<TypePostSkeleton, undefined, string>;
 export interface BlogPost {
   title: string;
   slug: string;
+  thumbnail: ContentImage | null;
+  featuredImage: ContentImage | null;
+  metaDescription: string | null;
+  metaKeywords: string[] | null;
+  creationDate: Date | null;
+  readingTime: number | null;
+  excerpt: RichTextDocument | null;
   body: RichTextDocument | null;
-  image: ContentImage | null;
 }
 
 // A function to transform a Contentful blog post
@@ -27,8 +33,18 @@ export function parseContentfulBlogPost(
   return {
     title: blogPostEntry.fields.title || "",
     slug: blogPostEntry.fields.slug,
-    body: blogPostEntry.fields.body || null,
-    image: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+    thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+    featuredImage: parseContentfulContentImage(
+      blogPostEntry.fields.featuredImage
+    ),
+    metaDescription: blogPostEntry.fields.metaDescription ?? null,
+    metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+    creationDate: blogPostEntry.fields.creationDate
+      ? new Date(blogPostEntry.fields.creationDate)
+      : null,
+    readingTime: blogPostEntry.fields.readingTime ?? null,
+    excerpt: blogPostEntry.fields.excerpt ?? null,
+    body: blogPostEntry.fields.body ?? null,
   };
 }
 
