@@ -67,10 +67,12 @@ export default async function BlogPage({
           {/* The blog post title */}
           <h1 className="text-4xl font-bold">{blogPost.title}</h1>
           {/* The blog post metadata */}
-          <div className="flex gap-8 mt-4 text-sm text-gray-500">
-            <p className="text-sm text-gray-500">2024-04-01</p>
-            <p className="text-sm text-gray-500">Author: John Doe</p>
-            <p className="text-sm text-gray-500">5 min read</p>
+          <div className="flex gap-10 mt-4 text-sm text-gray-500">
+            <p className="text-sm text-gray-500">
+              {blogPost.creationDate?.toLocaleDateString("en-GB")}
+            </p>
+            <p className="text-sm text-gray-500">Author:</p>
+            <p className="text-sm text-gray-500">{`${blogPost.readingTime} min`}</p>
           </div>
           <div>
             {/* The tags for the blog post */}
@@ -80,12 +82,12 @@ export default async function BlogPage({
           <ShareButtons title={blogPost.slug} />
         </div>
         <div className="flex justify-end">
-          {blogPost.image && (
+          {blogPost.featuredImage && (
             <Image
               width={850}
               height={500}
-              alt={blogPost.image.alt}
-              src={`https:${blogPost.image.src}`}
+              alt={blogPost.featuredImage.alt}
+              src={`https:${blogPost.featuredImage.src}`}
               className="rounded-lg"
             />
           )}

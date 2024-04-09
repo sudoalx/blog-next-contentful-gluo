@@ -16,9 +16,9 @@ export const Grid = async () => {
             title={post.title}
             date="2024-04-01"
             author="John Doe"
-            readingTime="5 min"
+            readingTime={post.readingTime}
             slug={post.slug}
-            image={post.image!}
+            image={post.thumbnail!}
           />
         ))}
       </div>

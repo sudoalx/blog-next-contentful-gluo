@@ -5,7 +5,7 @@ interface CardProps {
   title: string;
   date: string;
   author: string;
-  readingTime: string;
+  readingTime: number | null;
   slug: string;
   image: {
     src: string;
@@ -42,7 +42,7 @@ export const Card = ({
         <div className="flex justify-between mt-4 text-sm text-gray-500">
           <p className="text-sm text-gray-500">{date}</p>
           <p className="text-sm text-gray-500">{author}</p>
-          <p className="text-sm text-gray-500">{readingTime}</p>
+          <p className="text-sm text-gray-500">{`${readingTime} min`}</p>
         </div>
       </Link>
     </div>
