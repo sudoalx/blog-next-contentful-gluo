@@ -1,4 +1,5 @@
 "use client";
+import { useUrl } from "nextjs-current-url";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -15,24 +16,22 @@ interface ShareButtonsProps {
   title: string;
 }
 
-export const ShareButtons = ({
-  url = "https://example.com",
-  title,
-}: ShareButtonsProps) => {
+export const ShareButtons = ({ url, title }: ShareButtonsProps) => {
+  const { href: currentUrl } = useUrl() ?? {};
+
   return (
     <div className="flex gap-4 mt-12 mb-6 align-middle">
       <span className="flex items-center text-sm text-gray-500">Share!</span>
-
-      <LinkedinShareButton url={url} title={title}>
+      <LinkedinShareButton url={url ?? currentUrl!} title={title}>
         <LinkedinIcon size={32} round={true} />
       </LinkedinShareButton>
-      <TwitterShareButton url={url} title={title}>
+      <TwitterShareButton url={url ?? currentUrl!} title={title}>
         <TwitterIcon size={32} round={true} />
       </TwitterShareButton>
-      <FacebookShareButton url={url} hashtag={title}>
+      <FacebookShareButton url={url ?? currentUrl!} hashtag={title}>
         <FacebookIcon size={32} round={true} />
       </FacebookShareButton>
-      <WhatsappShareButton url={url} title={title}>
+      <WhatsappShareButton url={url ?? currentUrl!} title={title}>
         <WhatsappIcon size={32} round={true} />
       </WhatsappShareButton>
     </div>
