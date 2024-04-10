@@ -71,7 +71,7 @@ export default async function BlogPage({
             <p className="text-sm text-gray-500">
               {blogPost.creationDate?.toLocaleDateString("en-GB")}
             </p>
-            <p className="text-sm text-gray-500">Author:</p>
+            <p className="text-sm text-gray-500">Author: {blogPost.author}</p>
             <p className="text-sm text-gray-500">{`${blogPost.readingTime} min`}</p>
           </div>
           <div>
@@ -79,7 +79,7 @@ export default async function BlogPage({
             <TagPills />
           </div>
           {/* The share buttons */}
-          <ShareButtons title={blogPost.slug} />
+          <ShareButtons title={blogPost.title} />
         </div>
         <div className="flex justify-end">
           {blogPost.featuredImage && (

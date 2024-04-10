@@ -1,10 +1,11 @@
-import { TypePostSkeleton } from "./types";
+import { TypeAuthorSkeleton, TypePostSkeleton } from "./types";
 import { Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import contentfulClient from "./contentfulClient";
 import { ContentImage, parseContentfulContentImage } from "./contentImage";
 
 type BlogPostEntry = Entry<TypePostSkeleton, undefined, string>;
+type AuthorEntry = Entry<TypeAuthorSkeleton, undefined, string>;
 
 // Our simplified version of a BlogPost.
 // We don't need all the data that Contentful gives us.
@@ -19,19 +20,21 @@ export interface BlogPost {
   readingTime: number | null;
   excerpt: RichTextDocument | null;
   body: RichTextDocument | null;
+  author?: string;
 }
 
 // A function to transform a Contentful blog post
 // into our own BlogPost object.
 export function parseContentfulBlogPost(
-  blogPostEntry?: BlogPostEntry
+  blogPostEntry?: BlogPostEntry,
+  author?: AuthorEntry
 ): BlogPost | null {
   if (!blogPostEntry) {
     return null;
   }
 
   return {
-    title: blogPostEntry.fields.title || "",
+    title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
     featuredImage: parseContentfulContentImage(
@@ -45,6 +48,7 @@ export function parseContentfulBlogPost(
     readingTime: blogPostEntry.fields.readingTime ?? null,
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
+    author: author?.fields.fullName,
   };
 }
 
