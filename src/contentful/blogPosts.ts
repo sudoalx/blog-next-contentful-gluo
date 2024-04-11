@@ -23,6 +23,13 @@ export interface BlogPost {
   author?: string;
 }
 
+export interface AuthorProfile {
+  photo?: ContentImage | null;
+  fullName?: string;
+  slug?: string;
+  biography?: RichTextDocument | null;
+}
+
 // A function to transform a Contentful blog post
 // into our own BlogPost object.
 export function parseContentfulBlogPost(
@@ -34,6 +41,7 @@ export function parseContentfulBlogPost(
   }
 
   return {
+    author: author?.fields.fullName,
     title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
@@ -48,7 +56,6 @@ export function parseContentfulBlogPost(
     readingTime: blogPostEntry.fields.readingTime ?? null,
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
-    author: author?.fields.fullName,
   };
 }
 
@@ -57,20 +64,40 @@ export function parseContentfulBlogPost(
 interface FetchBlogPostsOptions {
   preview: boolean;
 }
-export async function fetchBlogPosts({
-  preview,
-}: FetchBlogPostsOptions): Promise<BlogPost[]> {
+export async function fetchBlogPosts(
+  { preview }: FetchBlogPostsOptions,
+  author?: AuthorEntry
+): Promise<BlogPost[]> {
   const contentful = contentfulClient({ preview });
 
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
     include: 2,
-    order: ["fields.title"],
+    order: ["sys.createdAt"],
   });
 
-  return blogPostsResult.items.map(
-    (blogPostEntry) => parseContentfulBlogPost(blogPostEntry) as BlogPost
-  );
+  // Map blog post entries to BlogPost objects including author information
+  return blogPostsResult.items.map((blogPostEntry) => {
+    const blogPostAuthor = author?.fields.fullName;
+
+    return {
+      author: blogPostAuthor,
+      title: blogPostEntry.fields.title || "",
+      slug: blogPostEntry.fields.slug || "",
+      thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+      featuredImage: parseContentfulContentImage(
+        blogPostEntry.fields.featuredImage
+      ),
+      metaDescription: blogPostEntry.fields.metaDescription ?? null,
+      metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+      creationDate: blogPostEntry.sys.createdAt
+        ? new Date(blogPostEntry.sys.createdAt)
+        : null,
+      readingTime: blogPostEntry.fields.readingTime ?? null,
+      excerpt: blogPostEntry.fields.excerpt ?? null,
+      body: blogPostEntry.fields.body ?? null,
+    };
+  });
 }
 
 // A function to fetch a single blog post by its slug.

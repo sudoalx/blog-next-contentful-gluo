@@ -41,6 +41,22 @@ export async function generateMetadata(
 
   return {
     title: blogPost.title,
+    description: blogPost.metaDescription,
+    keywords: blogPost.metaKeywords,
+    openGraph: {
+      title: blogPost.title,
+      description: blogPost.metaDescription ?? "",
+      type: "article",
+
+      images: [
+        {
+          url: blogPost.featuredImage
+            ? `https:${blogPost.featuredImage.src}`
+            : "https://via.placeholder.com/850x500",
+          alt: blogPost.featuredImage?.alt,
+        },
+      ],
+    },
   };
 }
 

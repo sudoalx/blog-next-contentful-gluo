@@ -40,7 +40,7 @@ export const Card = ({
         />
         <h2 className="text-xl font-semibold">{title}</h2>
         <div className="flex justify-between mt-4 text-sm text-gray-500">
-          <p className="text-sm text-gray-500">{date}</p>
+          <p className="text-sm text-gray-500">Date: {date}</p>
           <p className="text-sm text-gray-500">{author}</p>
           <p className="text-sm text-gray-500">{`${readingTime} min`}</p>
         </div>
