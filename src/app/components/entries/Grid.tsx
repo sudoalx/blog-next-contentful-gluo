@@ -8,14 +8,14 @@ export const Grid = async () => {
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
 
   return (
-    <div className="w-full lg:w-3/4">
+    <div className="w-full lg:w-5/6">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {blogPosts.map((post) => (
           <Card
             key={post.title}
             title={post.title}
-            date="2024-04-01"
-            author="John Doe"
+            date={post.creationDate!.toLocaleDateString()}
+            author={`${post.author}`}
             readingTime={post.readingTime}
             slug={post.slug}
             image={post.thumbnail!}
