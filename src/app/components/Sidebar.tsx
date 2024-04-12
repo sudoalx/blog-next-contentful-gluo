@@ -29,7 +29,7 @@ const categories = [
 
 export const Sidebar = () => {
   return (
-    <div className="lg:w-1/6 p-6 border border-gray-200 rounded-lg">
+    <div className="lg:w-1/6 px-4 py-2 border-gray-200 rounded-lg">
       <h2 className="text-xl font-semibold">Categories</h2>
       <ul className="mt-2">
         {categories.map((category) => (

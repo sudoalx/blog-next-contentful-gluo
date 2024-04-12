@@ -13,7 +13,7 @@ export default function BlogLayout({
           Draft mode is on! <ExitDraftModeLink className="underline" />
         </p>
       )}
-      {children}
+      <main className="container mx-auto px-4 py-8">{children}</main>
     </>
   );
 }

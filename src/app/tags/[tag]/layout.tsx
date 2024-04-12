@@ -1,4 +1,4 @@
-export default function CategoriesLayout({
+export default function TagsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

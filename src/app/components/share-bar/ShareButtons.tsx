@@ -1,7 +1,6 @@
 "use client";
 import { useUrl } from "nextjs-current-url";
 import {
-  FaClipboard,
   FaFacebook,
   FaLink,
   FaLinkedin,

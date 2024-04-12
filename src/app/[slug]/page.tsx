@@ -79,7 +79,7 @@ export default async function BlogPage({
   const author = await fetchAuthorProfileById(blogPost.authorId ?? "");
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div>
           {/* The blog post title */}
@@ -169,6 +169,6 @@ export default async function BlogPage({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
