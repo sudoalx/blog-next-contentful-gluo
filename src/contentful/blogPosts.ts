@@ -33,15 +33,15 @@ export interface AuthorProfile {
 // A function to transform a Contentful blog post
 // into our own BlogPost object.
 export function parseContentfulBlogPost(
-  blogPostEntry?: BlogPostEntry,
-  author?: AuthorEntry
+  blogPostEntry?: BlogPostEntry
 ): BlogPost | null {
   if (!blogPostEntry) {
     return null;
   }
+  const { fields } = blogPostEntry.fields.author as { fields: any };
 
   return {
-    author: author?.fields.fullName,
+    author: fields.fullName,
     title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
@@ -64,10 +64,9 @@ export function parseContentfulBlogPost(
 interface FetchBlogPostsOptions {
   preview: boolean;
 }
-export async function fetchBlogPosts(
-  { preview }: FetchBlogPostsOptions,
-  author?: AuthorEntry
-): Promise<BlogPost[]> {
+export async function fetchBlogPosts({
+  preview,
+}: FetchBlogPostsOptions): Promise<BlogPost[]> {
   const contentful = contentfulClient({ preview });
 
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
@@ -78,10 +77,8 @@ export async function fetchBlogPosts(
 
   // Map blog post entries to BlogPost objects including author information
   return blogPostsResult.items.map((blogPostEntry) => {
-    const blogPostAuthor = author?.fields.fullName;
-
+    const { fields } = blogPostEntry.fields.author as { fields: any };
     return {
-      author: blogPostAuthor,
       title: blogPostEntry.fields.title || "",
       slug: blogPostEntry.fields.slug || "",
       thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
@@ -96,6 +93,7 @@ export async function fetchBlogPosts(
       readingTime: blogPostEntry.fields.readingTime ?? null,
       excerpt: blogPostEntry.fields.excerpt ?? null,
       body: blogPostEntry.fields.body ?? null,
+      author: fields.fullName,
     };
   });
 }
