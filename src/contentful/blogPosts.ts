@@ -1,11 +1,10 @@
-import { TypeAuthorSkeleton, TypePostSkeleton } from "./types";
+import { TypePostSkeleton } from "./types";
 import { Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import contentfulClient from "./contentfulClient";
 import { ContentImage, parseContentfulContentImage } from "./contentImage";
 
 type BlogPostEntry = Entry<TypePostSkeleton, undefined, string>;
-type AuthorEntry = Entry<TypeAuthorSkeleton, undefined, string>;
 
 // Our simplified version of a BlogPost.
 // We don't need all the data that Contentful gives us.
@@ -20,14 +19,7 @@ export interface BlogPost {
   readingTime: number | null;
   excerpt: string | null;
   body: RichTextDocument | null;
-  author?: string;
-}
-
-export interface AuthorProfile {
-  photo?: ContentImage | null;
-  fullName?: string;
-  slug?: string;
-  biography?: RichTextDocument | null;
+  authorId?: string;
 }
 
 // A function to transform a Contentful blog post
@@ -38,10 +30,10 @@ export function parseContentfulBlogPost(
   if (!blogPostEntry) {
     return null;
   }
-  const { fields: author } = blogPostEntry.fields.author as { fields: any };
+  // const { fields: author } = blogPostEntry.fields.author as { fields: any };
 
   return {
-    author: author.fullName,
+    authorId: blogPostEntry.fields.author.sys.id,
     title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
@@ -77,7 +69,7 @@ export async function fetchBlogPosts({
 
   // Map blog post entries to BlogPost objects including author information
   return blogPostsResult.items.map((blogPostEntry) => {
-    const { fields } = blogPostEntry.fields.author as { fields: any };
+    // const { fields: author } = blogPostEntry.fields.author as { fields: any };
     return {
       title: blogPostEntry.fields.title || "",
       slug: blogPostEntry.fields.slug || "",
@@ -93,7 +85,7 @@ export async function fetchBlogPosts({
       readingTime: blogPostEntry.fields.readingTime ?? null,
       excerpt: blogPostEntry.fields.excerpt ?? null,
       body: blogPostEntry.fields.body ?? null,
-      author: fields.fullName,
+      authorId: blogPostEntry.fields.author.sys.id,
     };
   });
 }
