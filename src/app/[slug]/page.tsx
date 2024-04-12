@@ -2,11 +2,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { fetchBlogPost, fetchBlogPosts } from "../../contentful/blogPosts";
-import Link from "next/link";
 import RichText from "../../contentful/RichText";
 import Image from "next/image";
 import { ShareButtons } from "../components/share-bar/ShareButtons";
 import { TagPills } from "../components/tags/TagPills";
+import { fetchAuthorProfileById } from "@/contentful/authorProfile";
 
 interface BlogPostPageParams {
   slug: string;
@@ -76,6 +76,8 @@ export default async function BlogPage({
     return notFound();
   }
 
+  const author = await fetchAuthorProfileById(blogPost.authorId ?? "");
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -87,7 +89,7 @@ export default async function BlogPage({
             <p className="text-sm text-gray-500">
               {blogPost.creationDate?.toLocaleDateString("en-GB")}
             </p>
-            <p className="text-sm text-gray-500">Author: {blogPost.author}</p>
+            <p className="text-sm text-gray-500">Author: {author?.fullName}</p>
             <p className="text-sm text-gray-500">{`${blogPost.readingTime} min`}</p>
           </div>
           <div>
