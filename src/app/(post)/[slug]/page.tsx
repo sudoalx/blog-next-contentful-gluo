@@ -1,12 +1,12 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { fetchBlogPost, fetchBlogPosts } from "../../contentful/blogPosts";
+import { fetchBlogPost, fetchBlogPosts } from "../../../contentful/blogPosts";
 import Image from "next/image";
-import { ShareButtons } from "../components/metadata/ShareButtons";
-import { TagPills } from "../components/tags/TagPills";
+import { ShareButtons } from "../../components/metadata/ShareButtons";
+import { TagPills } from "../../components/tags/TagPills";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { PostInfo } from "../components/metadata/PostInfo";
+import { PostInfo } from "../../components/metadata/PostInfo";
 
 interface BlogPostPageParams {
   slug: string;
