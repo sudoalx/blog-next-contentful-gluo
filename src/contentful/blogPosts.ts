@@ -18,7 +18,7 @@ export interface BlogPost {
   metaKeywords: string[] | null;
   creationDate: Date | null;
   readingTime: number | null;
-  excerpt: RichTextDocument | null;
+  excerpt: string | null;
   body: RichTextDocument | null;
   author?: string;
 }
@@ -38,10 +38,10 @@ export function parseContentfulBlogPost(
   if (!blogPostEntry) {
     return null;
   }
-  const { fields } = blogPostEntry.fields.author as { fields: any };
+  const { fields: author } = blogPostEntry.fields.author as { fields: any };
 
   return {
-    author: fields.fullName,
+    author: author.fullName,
     title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),

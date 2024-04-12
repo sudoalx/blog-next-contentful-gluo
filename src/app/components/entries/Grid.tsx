@@ -19,6 +19,7 @@ export const Grid = async () => {
             readingTime={post.readingTime}
             slug={post.slug}
             image={post.thumbnail!}
+            excerpt={post.excerpt}
           />
         ))}
       </div>

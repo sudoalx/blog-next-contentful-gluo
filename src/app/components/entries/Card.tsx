@@ -13,6 +13,7 @@ interface CardProps {
     height: number;
     width: number;
   };
+  excerpt?: any;
 }
 
 export const Card = ({
@@ -27,6 +28,7 @@ export const Card = ({
     height: 500,
     width: 850,
   },
+  excerpt,
 }: CardProps) => {
   return (
     <div className="p-4 border border-gray-200 rounded-lg">
@@ -39,12 +41,20 @@ export const Card = ({
           className="rounded-lg mb-4 w-full"
         />
         <h2 className="text-xl font-semibold">{title}</h2>
-        <div className="flex justify-between mt-4 text-sm text-gray-500">
-          <p className="text-sm text-gray-500">Date: {date}</p>
-          <p className="text-sm text-gray-500">{author}</p>
-          <p className="text-sm text-gray-500">{`${readingTime} min`}</p>
-        </div>
+        <p className="text-gray-600 mt-2">{excerpt}... </p>
       </Link>
+      <Link
+        href={slug}
+        className="text-blue-500 hover:underline font-semibold mt-2"
+      >
+        Read more
+      </Link>
+
+      <div className="flex justify-between mt-4 text-sm text-gray-500">
+        <p className="text-sm text-gray-500">Date: {date}</p>
+        <p className="text-sm text-gray-500">{author}</p>
+        <p className="text-sm text-gray-500">{`${readingTime} min`}</p>
+      </div>
     </div>
   );
 };

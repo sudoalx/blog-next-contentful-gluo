@@ -10,9 +10,9 @@ export interface TypePostFields {
     metaKeywords: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     creationDate: EntryFieldTypes.Date;
     readingTime?: EntryFieldTypes.Integer;
-    excerpt: EntryFieldTypes.RichText;
     body: EntryFieldTypes.RichText;
     author: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
+    excerpt: EntryFieldTypes.Symbol;
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, "post">;
