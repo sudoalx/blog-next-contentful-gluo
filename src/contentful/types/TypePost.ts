@@ -6,13 +6,13 @@ export interface TypePostFields {
     slug: EntryFieldTypes.Symbol;
     thumbnail: EntryFieldTypes.AssetLink;
     featuredImage: EntryFieldTypes.AssetLink;
-    metaDescription?: EntryFieldTypes.Symbol;
-    metaKeywords?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
-    creationDate?: EntryFieldTypes.Date;
+    metaDescription: EntryFieldTypes.Symbol;
+    metaKeywords: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    creationDate: EntryFieldTypes.Date;
     readingTime?: EntryFieldTypes.Integer;
-    excerpt?: EntryFieldTypes.RichText;
-    body?: EntryFieldTypes.RichText;
-    author?: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
+    excerpt: EntryFieldTypes.RichText;
+    body: EntryFieldTypes.RichText;
+    author: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, "post">;
