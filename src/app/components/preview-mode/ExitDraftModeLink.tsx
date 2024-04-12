@@ -2,7 +2,9 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 
-function ExitDraftModeLink(props: React.HTMLProps<HTMLAnchorElement>) {
+function ExitDraftModeLink(
+  props: Readonly<React.HTMLProps<HTMLAnchorElement>>
+) {
   const pathname = usePathname();
 
   return (

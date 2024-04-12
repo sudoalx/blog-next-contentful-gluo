@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #0482de;
+}
+
 .eina {
   font-family: var(--font-eina);
 }

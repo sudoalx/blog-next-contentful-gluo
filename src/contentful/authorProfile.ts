@@ -17,12 +17,8 @@ export interface AuthorProfile {
 // A function to transform a Contentful author profile
 // into our own AuthorProfile object.
 export function parseContentfulAuthorProfile(
-  author?: AuthorEntry
-): AuthorProfile | null {
-  if (!author) {
-    return null;
-  }
-
+  author: AuthorEntry
+): AuthorProfile {
   return {
     photo: parseContentfulContentImage(author.fields.photo),
     fullName: author.fields.fullName,
@@ -41,8 +37,8 @@ export async function fetchAuthorProfiles(): Promise<AuthorProfile[]> {
     order: ["fields.fullName"],
   });
 
-  return authorProfilesResult.items.map(
-    (author) => parseContentfulAuthorProfile(author) as AuthorProfile
+  return authorProfilesResult.items.map((author) =>
+    parseContentfulAuthorProfile(author)
   );
 }
 
@@ -67,7 +63,7 @@ export async function fetchAuthorProfile({
 // A function that returns authors by id
 export async function fetchAuthorProfileById(
   id: string
-): Promise<AuthorProfile | null> {
+): Promise<AuthorProfile> {
   const contentful = contentfulClient({});
 
   const authorProfilesResult = await contentful.getEntry<TypeAuthorSkeleton>(

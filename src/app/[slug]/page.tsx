@@ -2,11 +2,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { fetchBlogPost, fetchBlogPosts } from "../../contentful/blogPosts";
-import RichText from "../../contentful/RichText";
 import Image from "next/image";
-import { ShareButtons } from "../components/share-bar/ShareButtons";
+import { ShareButtons } from "../components/metadata/ShareButtons";
 import { TagPills } from "../components/tags/TagPills";
-import { fetchAuthorProfileById } from "@/contentful/authorProfile";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { PostInfo } from "../components/metadata/PostInfo";
 
 interface BlogPostPageParams {
   slug: string;
@@ -76,22 +76,20 @@ export default async function BlogPage({
     return notFound();
   }
 
-  const author = await fetchAuthorProfileById(blogPost.authorId ?? "");
-
   return (
     <>
+      {/* Post header */}
       <div className="grid grid-cols-1 md:grid-cols-2">
+        {/* Top left section */}
         <div>
           {/* The blog post title */}
           <h1 className="text-4xl font-bold">{blogPost.title}</h1>
-          {/* The blog post metadata */}
-          <div className="flex flex-wrap gap-2 sm:gap-10 mt-4 text-xs text-gray-500">
-            <p className="text-xs text-gray-500">
-              {blogPost.creationDate?.toLocaleDateString("en-GB")}
-            </p>
-            <p className="text-xs text-gray-500">Author: {author?.fullName}</p>
-            <p className="text-xs text-gray-500">{`${blogPost.readingTime} min`}</p>
-          </div>
+          {/* The blog post info */}
+          <PostInfo
+            authorId={blogPost.authorId!}
+            creationDate={blogPost.creationDate!}
+            body={blogPost.body!}
+          />
           <div>
             {/* The tags for the blog post */}
             <TagPills />
@@ -99,6 +97,7 @@ export default async function BlogPage({
           {/* The share buttons */}
           <ShareButtons title={blogPost.title} />
         </div>
+        {/* Top right section */}
         <div className="flex justify-end">
           <div>
             {blogPost.featuredImage && (
@@ -113,10 +112,13 @@ export default async function BlogPage({
           </div>
         </div>
       </div>
+
+      {/* Post body */}
       <div className="text-lg mt-36">
-        <RichText document={blogPost.body} />
+        {documentToReactComponents(blogPost.body!)}
       </div>
 
+      {/* Related posts */}
       <div>
         <h3 className="text-2xl font-semibold mt-8 mb-4 border-b border-gray-200 pb-4">
           Related

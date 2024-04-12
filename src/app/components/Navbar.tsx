@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./branding/Logo";
+import { asm } from "../config/fonts";
 
 export const Navbar = () => {
   return (
@@ -13,17 +14,17 @@ export const Navbar = () => {
         </Link>
         <ul className="hidden space-x-4 sm:flex">
           <li>
-            <Link href="#" className="">
+            <Link href="#" className={`${asm.className}`}>
               Home
             </Link>
           </li>
           <li>
-            <Link href="#" className="">
+            <Link href="#" className={`${asm.className}`}>
               About
             </Link>
           </li>
           <li>
-            <Link href="#" className="">
+            <Link href="#" className={`${asm.className}`}>
               Contact
             </Link>
           </li>

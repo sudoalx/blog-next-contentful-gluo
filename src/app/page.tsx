@@ -1,4 +1,4 @@
-import { Grid } from "./components/entries/Grid";
+import { Grid } from "./components/layout/PostsGrid";
 import { Sidebar } from "./components";
 
 export default function Home() {

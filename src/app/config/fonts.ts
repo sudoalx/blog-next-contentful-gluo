@@ -6,3 +6,8 @@ export const elina = localFont({
   src: "../fonts/Eina02-Regular.woff2",
   variable: "--font-eina",
 });
+
+export const asm = localFont({
+  src: "../fonts/ASM-Regular.woff2",
+  variable: "--font-asm",
+});
