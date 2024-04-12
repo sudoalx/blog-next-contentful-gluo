@@ -23,7 +23,7 @@
 @media (min-width: 576px) {
   .container,
   .container-sm {
-    max-width: 540px;
+    max-width: 590px;
   }
 }
 
@@ -31,7 +31,7 @@
   .container,
   .container-md,
   .container-sm {
-    max-width: 720px;
+    max-width: 770px;
   }
 }
 
@@ -40,7 +40,7 @@
   .container-lg,
   .container-md,
   .container-sm {
-    max-width: 960px;
+    max-width: 1010px;
   }
 }
 
@@ -50,7 +50,7 @@
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 1160px;
+    max-width: 1210px;
   }
 }
 
@@ -61,6 +61,18 @@
   .container-sm,
   .container-xl,
   .container-xxl {
-    max-width: 1160px;
+    max-width: 1210px;
   }
+}
+
+html {
+  @apply h-full scroll-smooth antialiased;
+}
+
+body {
+  @apply flex h-full flex-col;
+}
+
+main {
+  @apply grow;
 }
