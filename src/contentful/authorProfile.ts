@@ -18,7 +18,10 @@ export interface AuthorProfile {
 // into our own AuthorProfile object.
 export function parseContentfulAuthorProfile(
   author: AuthorEntry
-): AuthorProfile {
+): AuthorProfile | null {
+  if (!author) {
+    return null;
+  }
   return {
     photo: parseContentfulContentImage(author.fields.photo),
     fullName: author.fields.fullName,
@@ -37,8 +40,8 @@ export async function fetchAuthorProfiles(): Promise<AuthorProfile[]> {
     order: ["fields.fullName"],
   });
 
-  return authorProfilesResult.items.map((author) =>
-    parseContentfulAuthorProfile(author)
+  return authorProfilesResult.items.map(
+    (author) => parseContentfulAuthorProfile(author) ?? {}
   );
 }
 
@@ -73,5 +76,5 @@ export async function fetchAuthorProfileById(
     }
   );
 
-  return parseContentfulAuthorProfile(authorProfilesResult);
+  return parseContentfulAuthorProfile(authorProfilesResult) ?? {};
 }
