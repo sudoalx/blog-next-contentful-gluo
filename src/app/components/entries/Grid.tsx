@@ -1,21 +1,28 @@
 import { draftMode } from "next/headers";
 import { fetchBlogPosts } from "../../../contentful/blogPosts";
 import { Card } from "./Card";
+import { fetchAuthorProfileById } from "@/contentful/authorProfile";
 
 export const Grid = async () => {
   // Fetch blog posts using the content preview
   // if draft mode is enabled:
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
 
+  // Fetch author profiles in parallel
+  const authorPromises = blogPosts.map((post) =>
+    fetchAuthorProfileById(post.authorId!)
+  );
+  const authorProfiles = await Promise.all(authorPromises);
+
   return (
     <div className="w-full lg:w-5/6">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {blogPosts.map((post) => (
+        {blogPosts.map((post, index) => (
           <Card
             key={post.title}
             title={post.title}
             date={post.creationDate!.toLocaleDateString()}
-            author={`${post.author}`}
+            author={authorProfiles[index]!.fullName!}
             readingTime={post.readingTime}
             slug={post.slug}
             image={post.thumbnail!}
