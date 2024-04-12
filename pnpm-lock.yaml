@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@contentful/rich-text-plain-text-renderer':
+    specifier: ^16.0.13
+    version: 16.0.13
   '@contentful/rich-text-react-renderer':
     specifier: ^15.19.6
     version: 15.19.6(react-dom@18.2.0)(react@18.2.0)
@@ -32,6 +35,9 @@ dependencies:
   react-share:
     specifier: ^5.1.0
     version: 5.1.0(react@18.2.0)
+  reading-time-estimator:
+    specifier: ^1.11.0
+    version: 1.11.0
 
 devDependencies:
   '@types/node':
@@ -90,6 +96,13 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@contentful/rich-text-plain-text-renderer@16.0.13:
+    resolution: {integrity: sha512-r1w9NjxRAf275G7vtI9EiWVA5fWHXSCdx6yUYPsIxR2eHtwjswDG6QrmHeTBOuyKYPdEFtHUWTo6KTGGd0SYZg==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@contentful/rich-text-types': 16.3.5
+    dev: false
 
   /@contentful/rich-text-react-renderer@15.19.6(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-SPpkr2uSyirsN/uUaek8djqLMGP8nPqSqxoQ8M0VJcfD9+INKK56vjmteNr5dBbqAZO/PJMxT1S8to9BndpinQ==}
@@ -3498,6 +3511,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /reading-time-estimator@1.11.0:
+    resolution: {integrity: sha512-2813WXSxCPsDvgrYq+cPBI4gGqgmtKlo62rpI0mwnhrMfZJIqbDfOeidr9Y36OruDesQGmYA9DkVRmvsBbv2DA==}
+    dev: false
 
   /redeyed@2.1.1:
     resolution: {integrity: sha512-FNpGGo1DycYAdnrKFxCMmKYgo/mILAqtRYbkdQD8Ep/Hk2PQ5+aEAEx+IU713RTDmuBaH0c8P5ZozurNu5ObRQ==}
