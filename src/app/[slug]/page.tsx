@@ -78,7 +78,7 @@ export default async function BlogPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         <div>
           {/* The blog post title */}
           <h1 className="text-4xl font-bold">{blogPost.title}</h1>
@@ -104,7 +104,7 @@ export default async function BlogPage({
               height={500}
               alt={blogPost.featuredImage.alt}
               src={`https:${blogPost.featuredImage.src}`}
-              className="rounded-lg"
+              className="rounded-lg object-cover w-full"
             />
           )}
         </div>
