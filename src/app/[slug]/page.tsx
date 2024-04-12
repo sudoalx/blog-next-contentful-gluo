@@ -85,12 +85,12 @@ export default async function BlogPage({
           {/* The blog post title */}
           <h1 className="text-4xl font-bold">{blogPost.title}</h1>
           {/* The blog post metadata */}
-          <div className="flex gap-10 mt-4 text-sm text-gray-500">
-            <p className="text-sm text-gray-500">
+          <div className="flex flex-wrap gap-2 sm:gap-10 mt-4 text-xs text-gray-500">
+            <p className="text-xs text-gray-500">
               {blogPost.creationDate?.toLocaleDateString("en-GB")}
             </p>
-            <p className="text-sm text-gray-500">Author: {author?.fullName}</p>
-            <p className="text-sm text-gray-500">{`${blogPost.readingTime} min`}</p>
+            <p className="text-xs text-gray-500">Author: {author?.fullName}</p>
+            <p className="text-xs text-gray-500">{`${blogPost.readingTime} min`}</p>
           </div>
           <div>
             {/* The tags for the blog post */}
@@ -100,18 +100,20 @@ export default async function BlogPage({
           <ShareButtons title={blogPost.title} />
         </div>
         <div className="flex justify-end">
-          {blogPost.featuredImage && (
-            <Image
-              width={850}
-              height={500}
-              alt={blogPost.featuredImage.alt}
-              src={`https:${blogPost.featuredImage.src}`}
-              className="rounded-lg object-cover w-full"
-            />
-          )}
+          <div>
+            {blogPost.featuredImage && (
+              <Image
+                width={850}
+                height={500}
+                alt={blogPost.featuredImage.alt}
+                src={`https:${blogPost.featuredImage.src}`}
+                className="rounded-lg max-w-full"
+              />
+            )}
+          </div>
         </div>
       </div>
-      <div className="text-lg mt-4">
+      <div className="text-lg mt-36">
         <RichText document={blogPost.body} />
       </div>
 
@@ -129,10 +131,10 @@ export default async function BlogPage({
               className="rounded-lg mb-4 w-full"
             />
             <h2 className="text-xl font-semibold">Blog Post 1</h2>
-            <div className="flex justify-between mt-4 text-sm text-gray-500">
-              <p className="text-sm text-gray-500">2021-09-01</p>
-              <p className="text-sm text-gray-500">Author</p>
-              <p className="text-sm text-gray-500">5 min read</p>
+            <div className="flex justify-between mt-4 text-xs text-gray-500">
+              <p className="text-xs text-gray-500">2021-09-01</p>
+              <p className="text-xs text-gray-500">Author</p>
+              <p className="text-xs text-gray-500">5 min read</p>
             </div>
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
@@ -144,10 +146,10 @@ export default async function BlogPage({
               className="rounded-lg mb-4 w-full"
             />
             <h2 className="text-xl font-semibold">Blog Post 2</h2>
-            <div className="flex justify-between mt-4 text-sm text-gray-500">
-              <p className="text-sm text-gray-500">2021-09-01</p>
-              <p className="text-sm text-gray-500">Author</p>
-              <p className="text-sm text-gray-500">5 min read</p>
+            <div className="flex justify-between mt-4 text-xs text-gray-500">
+              <p className="text-xs text-gray-500">2021-09-01</p>
+              <p className="text-xs text-gray-500">Author</p>
+              <p className="text-xs text-gray-500">5 min read</p>
             </div>
           </div>
           <div className="p-4 border border-gray-200 rounded-lg">
@@ -159,10 +161,10 @@ export default async function BlogPage({
               className="rounded-lg mb-4 w-full"
             />
             <h2 className="text-xl font-semibold">Blog Post 3</h2>
-            <div className="flex justify-between mt-4 text-sm text-gray-500">
-              <p className="text-sm text-gray-500">2021-09-01</p>
-              <p className="text-sm text-gray-500">Author</p>
-              <p className="text-sm text-gray-500">5 min read</p>
+            <div className="flex justify-between mt-4 text-xs text-gray-500">
+              <p className="text-xs text-gray-500">2021-09-01</p>
+              <p className="text-xs text-gray-500">Author</p>
+              <p className="text-xs text-gray-500">5 min read</p>
             </div>
           </div>
         </div>
