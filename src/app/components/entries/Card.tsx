@@ -31,17 +31,18 @@ export const Card = ({
   excerpt,
 }: CardProps) => {
   return (
-    <div className="p-4 border border-gray-200 rounded-lg">
+    <div className="p-4 border border-gray-200 ">
       <Link href={slug}>
         <Image
           src={`https:${image.src}`}
           alt={image.alt}
           height={image.height}
           width={image.width}
-          className="rounded-lg mb-4 w-full"
+          // set height and width to maintain aspect ratio
+          className="rounded-lg mb-4 w-full h-40 object-cover"
         />
         <h2 className="text-xl font-semibold">{title}</h2>
-        <p className="text-gray-600 mt-2">{excerpt}... </p>
+        <p className="text-gray-600 mt-2">{excerpt}</p>
       </Link>
       <Link
         href={slug}
