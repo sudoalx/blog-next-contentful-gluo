@@ -1,5 +1,5 @@
 import { draftMode } from "next/headers";
-import { fetchBlogPosts } from "../../../contentful/blogPosts";
+import { fetchBlogPosts } from "../../../contentful/lib/blogPosts";
 import { Card } from "../posts/PostCard";
 
 export const Grid = async () => {

@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
-import { fetchAuthorProfileById } from "@/contentful/authorProfile";
+import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
+import ContentfulImage from "../ui/ContentfulImage";
 
 interface CardProps {
   title: string;
@@ -38,8 +39,8 @@ export const Card = async ({
   return (
     <div className="p-4 border border-gray-200 ">
       <Link href={slug}>
-        <Image
-          src={`https:${image.src}`}
+        <ContentfulImage
+          src={image.src}
           alt={image.alt}
           height={image.height}
           width={image.width}

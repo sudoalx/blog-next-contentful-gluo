@@ -1,7 +1,7 @@
 import {
   fetchAuthorProfile,
   fetchAuthorProfiles,
-} from "@/contentful/authorProfile";
+} from "@/contentful/lib/authorProfile";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Metadata, ResolvingMetadata } from "next";

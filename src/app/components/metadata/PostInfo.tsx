@@ -1,5 +1,5 @@
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
-import { fetchAuthorProfileById } from "@/contentful/authorProfile";
+import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
 
 interface PostInfoProps {

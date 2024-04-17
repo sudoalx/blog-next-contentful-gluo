@@ -1,12 +1,16 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { fetchBlogPost, fetchBlogPosts } from "../../../contentful/blogPosts";
+import {
+  fetchBlogPost,
+  fetchBlogPosts,
+} from "../../../contentful/lib/blogPosts";
 import Image from "next/image";
 import { ShareButtons } from "../../components/metadata/ShareButtons";
 import { TagPills } from "../../components/tags/TagPills";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { PostInfo } from "../../components/metadata/PostInfo";
+import ContentfulImage from "@/app/components/ui/ContentfulImage";
+import { RichText } from "@/app/components/contentful/RichText";
 
 interface BlogPostPageParams {
   slug: string;
@@ -50,9 +54,7 @@ export async function generateMetadata(
 
       images: [
         {
-          url: blogPost.featuredImage
-            ? `https:${blogPost.featuredImage.src}`
-            : "https://via.placeholder.com/850x500",
+          url: blogPost.featuredImage?.src!,
           alt: blogPost.featuredImage?.alt,
         },
       ],
@@ -75,6 +77,7 @@ export default async function BlogPage({
     // tell Next.js to render a 404 page.
     return notFound();
   }
+  console.log(blogPost.body);
 
   return (
     <>
@@ -101,13 +104,7 @@ export default async function BlogPage({
         <div className="flex justify-end">
           <div>
             {blogPost.featuredImage && (
-              <Image
-                width={850}
-                height={500}
-                alt={blogPost.featuredImage.alt}
-                src={`https:${blogPost.featuredImage.src}`}
-                className="rounded-lg max-w-full"
-              />
+              <ContentfulImage {...blogPost.featuredImage} />
             )}
           </div>
         </div>
@@ -115,7 +112,7 @@ export default async function BlogPage({
 
       {/* Post body */}
       <div className="text-lg mt-36">
-        {documentToReactComponents(blogPost.body!)}
+        <RichText document={blogPost.body} />
       </div>
 
       {/* Related posts */}
