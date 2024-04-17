@@ -1,4 +1,4 @@
-import { TypePostSkeleton } from "./types";
+import { TypePostSkeleton } from "../types";
 import { Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import contentfulClient from "./contentfulClient";
@@ -89,6 +89,9 @@ export async function fetchBlogPosts({
     };
   });
 }
+
+// A function to fetch blogposts by author
+const fetchBlogPostsByAuthor = () => {};
 
 // A function to fetch a single blog post by its slug.
 // Optionally uses the Contentful content preview.

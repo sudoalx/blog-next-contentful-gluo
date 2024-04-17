@@ -1,4 +1,4 @@
-import { TypeAuthorSkeleton } from "./types";
+import { TypeAuthorSkeleton } from "../types";
 import { Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import contentfulClient from "./contentfulClient";
