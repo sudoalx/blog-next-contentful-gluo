@@ -99,13 +99,16 @@ const options: CustomOptions = {
           </div>
         );
       }
-      return <p className="text-gray-700 mb-4">{children}</p>;
+      return <p className="text-gray-800 mb-4">{children}</p>;
     },
 
     [INLINES.ENTRY_HYPERLINK]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === "post") {
         return (
-          <Link href={`/posts/${node.data.target.fields.slug}`}>
+          <Link
+            href={`/posts/${node.data.target.fields.slug}`}
+            className="text-blue-500 hover:underline"
+          >
             {node.data.target.fields.title}
           </Link>
         );
@@ -118,7 +121,12 @@ const options: CustomOptions = {
         (item: any) => item.nodeType === "text"
       )?.value;
       return (
-        <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
+        <a
+          href={node.data.uri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:underline"
+        >
           {text}
         </a>
       );
