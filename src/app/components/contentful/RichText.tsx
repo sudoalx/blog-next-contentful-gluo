@@ -17,10 +17,10 @@ type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {
 
 const options: CustomOptions = {
   renderMark: {
-    [MARKS.CODE]: (text: ReactNode) => {
+    [MARKS.CODE]: (code: ReactNode) => {
       return (
         <pre>
-          <code>{text}</code>
+          <code>{code}</code>
         </pre>
       );
     },
@@ -69,20 +69,18 @@ const options: CustomOptions = {
       );
     },
     [BLOCKS.UL_LIST]: (node: any, children: ReactNode) => {
-      return <ul className="list-disc list-inside">{children}</ul>;
+      return <ul className="list-disc list-inside inline-block">{children}</ul>;
     },
     [BLOCKS.OL_LIST]: (node: any, children: ReactNode) => {
-      return <ol className="list-decimal list-inside">{children}</ol>;
+      return (
+        <ol className="list-decimal list-inside inline-block">{children}</ol>
+      );
     },
     [BLOCKS.LIST_ITEM]: (node: any, children: ReactNode) => {
       return <li className="text-gray-700 mb-2">{children}</li>;
     },
     [BLOCKS.QUOTE]: (node: any, children: ReactNode) => {
-      return (
-        <blockquote className="text-gray-700 italic border-l-4 border-gray-300 pl-4 mb-4">
-          {children}
-        </blockquote>
-      );
+      return <blockquote>{children}</blockquote>;
     },
     [BLOCKS.HR]: () => {
       return <hr className="border-t border-gray-300 my-8" />;

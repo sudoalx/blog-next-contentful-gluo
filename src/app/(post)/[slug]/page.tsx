@@ -77,7 +77,6 @@ export default async function BlogPage({
     // tell Next.js to render a 404 page.
     return notFound();
   }
-  console.log(blogPost.body);
 
   return (
     <>
