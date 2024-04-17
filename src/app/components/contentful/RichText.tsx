@@ -1,29 +1,23 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import {
+  NodeRenderer,
+  Options,
+  RenderMark,
+  documentToReactComponents,
+} from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import ContentfulImage from "../ui/ContentfulImage";
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  AwaitedReactNode,
-  ReactPortal,
-} from "react";
+import { ReactNode } from "react";
 import Link from "next/link";
 
-const options = {
+// Define custom options type
+type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {
+  renderMark: RenderMark;
+  renderNode: Record<string, NodeRenderer>;
+};
+
+const options: CustomOptions = {
   renderMark: {
-    [MARKS.CODE]: (
-      text:
-        | string
-        | number
-        | boolean
-        | ReactElement<any, string | JSXElementConstructor<any>>
-        | Iterable<ReactNode>
-        | ReactPortal
-        | Promise<AwaitedReactNode>
-        | null
-        | undefined
-    ) => {
+    [MARKS.CODE]: (text: ReactNode) => {
       return (
         <pre>
           <code>{text}</code>
@@ -32,43 +26,85 @@ const options = {
     },
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (
-      node: { content: any[] },
-      children:
-        | string
-        | number
-        | boolean
-        | ReactElement<any, string | JSXElementConstructor<any>>
-        | Iterable<ReactNode>
-        | Promise<AwaitedReactNode>
-        | null
-        | undefined
-    ) => {
+    [BLOCKS.HEADING_1]: (node: any, children: ReactNode) => {
+      return (
+        <h1 className="text-4xl font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h1>
+      );
+    },
+    [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => {
+      return (
+        <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h2>
+      );
+    },
+    [BLOCKS.HEADING_3]: (node: any, children: ReactNode) => {
+      return (
+        <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h3>
+      );
+    },
+    [BLOCKS.HEADING_4]: (node: any, children: ReactNode) => {
+      return (
+        <h4 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h4>
+      );
+    },
+    [BLOCKS.HEADING_5]: (node: any, children: ReactNode) => {
+      return (
+        <h5 className="text-lg font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h5>
+      );
+    },
+    [BLOCKS.HEADING_6]: (node: any, children: ReactNode) => {
+      return (
+        <h6 className="text-base font-bold text-gray-900 mb-4 mt-8">
+          {children}
+        </h6>
+      );
+    },
+    [BLOCKS.UL_LIST]: (node: any, children: ReactNode) => {
+      return <ul className="list-disc list-inside">{children}</ul>;
+    },
+    [BLOCKS.OL_LIST]: (node: any, children: ReactNode) => {
+      return <ol className="list-decimal list-inside">{children}</ol>;
+    },
+    [BLOCKS.LIST_ITEM]: (node: any, children: ReactNode) => {
+      return <li className="text-gray-700 mb-2">{children}</li>;
+    },
+    [BLOCKS.QUOTE]: (node: any, children: ReactNode) => {
+      return (
+        <blockquote className="text-gray-700 italic border-l-4 border-gray-300 pl-4 mb-4">
+          {children}
+        </blockquote>
+      );
+    },
+    [BLOCKS.HR]: () => {
+      return <hr className="border-t border-gray-300 my-8" />;
+    },
+    [BLOCKS.PARAGRAPH]: (node: any, children: ReactNode) => {
       if (
-        node.content.find((item) =>
-          item.marks?.find((mark: { type: string }) => mark.type === "code")
+        node.content.find((item: any) =>
+          item.marks?.find((mark: any) => mark.type === "code")
         )
       ) {
         return (
           <div>
-            <pre>
-              <code>{children}</code>
+            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+              <code className="text-sm font-mono">{children}</code>
             </pre>
           </div>
         );
       }
-
-      return <p>{children}</p>;
+      return <p className="text-gray-700 mb-4">{children}</p>;
     },
 
-    [INLINES.ENTRY_HYPERLINK]: (node: {
-      data: {
-        target: {
-          sys: { contentType: { sys: { id: string } } };
-          fields: { slug: any; title: any };
-        };
-      };
-    }) => {
+    [INLINES.ENTRY_HYPERLINK]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === "post") {
         return (
           <Link href={`/posts/${node.data.target.fields.slug}`}>
@@ -76,13 +112,13 @@ const options = {
           </Link>
         );
       }
+      return null; // Return null for no output
     },
 
-    [INLINES.HYPERLINK]: (node: {
-      content: any[];
-      data: { uri: string | undefined };
-    }) => {
-      const text = node.content.find((item) => item.nodeType === "text")?.value;
+    [INLINES.HYPERLINK]: (node: any, children: ReactNode) => {
+      const text = node.content.find(
+        (item: any) => item.nodeType === "text"
+      )?.value;
       return (
         <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
           {text}
@@ -90,14 +126,7 @@ const options = {
       );
     },
 
-    [BLOCKS.EMBEDDED_ENTRY]: (node: {
-      data: {
-        target: {
-          sys: { contentType: { sys: { id: string } } };
-          fields: { embedUrl: string | undefined; title: string | undefined };
-        };
-      };
-    }) => {
+    [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === "videoEmbed") {
         return (
           <iframe
@@ -109,21 +138,10 @@ const options = {
           />
         );
       }
+      return null; // Return null for no output
     },
 
-    [BLOCKS.EMBEDDED_ASSET]: (node: {
-      data: {
-        target: {
-          fields: {
-            file: {
-              url: string;
-              details: { image: { height: number; width: number } };
-            };
-            title: string;
-          };
-        };
-      };
-    }) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       return (
         <ContentfulImage
           src={node.data.target.fields.file.url}
