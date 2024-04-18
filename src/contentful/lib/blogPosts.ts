@@ -79,8 +79,8 @@ export async function fetchBlogPosts({
       ),
       metaDescription: blogPostEntry.fields.metaDescription ?? null,
       metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
-      creationDate: blogPostEntry.sys.createdAt
-        ? new Date(blogPostEntry.sys.createdAt)
+      creationDate: blogPostEntry.fields.creationDate
+        ? new Date(blogPostEntry.fields.creationDate)
         : null,
       readingTime: blogPostEntry.fields.readingTime ?? null,
       excerpt: blogPostEntry.fields.excerpt ?? null,
