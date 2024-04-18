@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
@@ -36,8 +35,9 @@ export const Card = async ({
 }: CardProps) => {
   const readingTime = await readingTimeEstimator(body);
   const author = await fetchAuthorProfileById(authorId);
+
   return (
-    <div className="p-4 border border-gray-200 ">
+    <article className="p-4 border border-gray-200 ">
       <Link href={slug}>
         <ContentfulImage
           src={image.src}
@@ -56,6 +56,6 @@ export const Card = async ({
         <p className="text-sm text-gray-500">{author?.fullName}</p>
         <p className="text-sm text-gray-500">{`${readingTime}`}</p>
       </div>
-    </div>
+    </article>
   );
 };
