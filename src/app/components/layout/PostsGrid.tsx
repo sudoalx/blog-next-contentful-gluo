@@ -3,8 +3,6 @@ import { fetchBlogPosts } from "../../../contentful/lib/blogPosts";
 import { Card } from "../posts/PostCard";
 
 export const Grid = async () => {
-  // Fetch blog posts using the content preview
-  // if draft mode is enabled:
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
 
   return (
@@ -14,7 +12,7 @@ export const Grid = async () => {
           <Card
             key={post.title}
             title={post.title}
-            date={post.creationDate!.toLocaleDateString()}
+            date={new Date(post.creationDate!).toLocaleDateString()}
             authorId={post.authorId!}
             body={post.body!}
             slug={post.slug}
