@@ -157,7 +157,7 @@ const options: CustomOptions = {
             alt={node.data.target.fields.title}
             className="w-full mb-4 mt-8"
           />
-          // caption text goes after the image
+          {/* caption */}
           <p className="text-sm text-gray-600">
             {node.data.target.fields.description}
           </p>
