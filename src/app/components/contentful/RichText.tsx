@@ -135,13 +135,23 @@ const options: CustomOptions = {
     [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
       if (node.data.target.sys.contentType.sys.id === "videoEmbed") {
         return (
-          <iframe
-            height="400"
-            width="100%"
-            src={node.data.target.fields.embedUrl}
-            title={node.data.target.fields.title}
-            allowFullScreen={true}
-          />
+          <div
+            className="container relative"
+            style={{
+              paddingBottom: "56.25%",
+              paddingTop: "30px",
+              height: "0",
+              overflow: "hidden",
+              maxWidth: "100%",
+            }}
+          >
+            <iframe
+              className="video absolute top-0 left-0 w-full h-full"
+              src={node.data.target.fields.embedUrl}
+              title={node.data.target.fields.title}
+              allowFullScreen
+            ></iframe>
+          </div>
         );
       }
       return null; // Return null for no output
