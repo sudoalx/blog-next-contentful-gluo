@@ -5,14 +5,10 @@ import {
   fetchBlogPost,
   fetchBlogPosts,
 } from "../../../contentful/lib/blogPosts";
-import Image from "next/image";
-import { ShareButtons } from "../../components/metadata/ShareButtons";
-import { TagPills } from "../../components/tags/TagPills";
-import { PostInfo } from "../../components/metadata/PostInfo";
-import ContentfulImage from "@/app/components/ui/ContentfulImage";
 import { RichText } from "@/app/components/contentful/RichText";
 import { RelatedPosts } from "@/app/components/post/RelatedPosts";
 import { PostHeader } from "@/app/components/post/PostHeader";
+import { DisqusComments } from "@/app/components/post/DisqusComments";
 
 interface BlogPostPageParams {
   slug: string;
@@ -91,6 +87,7 @@ export default async function BlogPage({
           <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
         </div>
       </article>
+      <DisqusComments post={blogPost} />
 
       {/* Related Post section */}
       <RelatedPosts />
