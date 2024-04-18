@@ -5,14 +5,13 @@ export interface TypePostFields {
     title: EntryFieldTypes.Symbol;
     slug: EntryFieldTypes.Symbol;
     thumbnail: EntryFieldTypes.AssetLink;
+    excerpt: EntryFieldTypes.Symbol;
     featuredImage: EntryFieldTypes.AssetLink;
     metaDescription: EntryFieldTypes.Symbol;
     metaKeywords: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     creationDate: EntryFieldTypes.Date;
-    readingTime?: EntryFieldTypes.Integer;
     body: EntryFieldTypes.RichText;
     author: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
-    excerpt: EntryFieldTypes.Symbol;
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, "post">;
