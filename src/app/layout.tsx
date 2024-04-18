@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Navbar } from "./components";
-import { elina } from "./config/fonts";
+import { eina } from "./config/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={elina.className}>
+      <body className={eina.className}>
         <Navbar />
         {children}
         <Footer />

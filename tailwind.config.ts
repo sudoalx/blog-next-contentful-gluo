@@ -15,6 +15,8 @@ const config: Config = {
       },
       fontFamily: {
         eina: ["var(--font-eina)"],
+        einalight: ["var(--font-eina-light)"],
+        asm: ["var(--font-asm)"],
       },
     },
   },

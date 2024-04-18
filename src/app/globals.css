@@ -10,6 +10,10 @@
   font-family: var(--font-eina);
 }
 
+.eina-light {
+  font-family: var(--font-eina-light);
+}
+
 .container,
 .container-fluid,
 .container-lg,
