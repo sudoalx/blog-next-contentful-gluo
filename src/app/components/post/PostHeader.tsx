@@ -12,14 +12,6 @@ interface NextImageProps {
   className?: string;
 }
 
-interface PostHeaderProps {
-  title: string;
-  authorId: string;
-  creationDate: Date;
-  body: RichTextDocument;
-  featuredImage?: NextImageProps;
-}
-
 export const PostHeader = ({ blogPost }: any) => {
   const { title, authorId, creationDate, body, featuredImage } = blogPost;
 
