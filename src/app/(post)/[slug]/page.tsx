@@ -1,10 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import {
-  fetchBlogPost,
-  fetchBlogPosts,
-} from "../../../contentful/lib/blogPosts";
+import { fetchBlogPost, fetchBlogPosts } from "@/contentful/lib/blogPosts";
 import { RichText } from "@/app/components/contentful/RichText";
 import { RelatedPosts } from "@/app/components/post/RelatedPosts";
 import { PostHeader } from "@/app/components/post/PostHeader";
