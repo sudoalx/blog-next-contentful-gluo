@@ -82,13 +82,15 @@ export default async function BlogPage({
 
   return (
     <>
-      {/* Post Header */}
-      <PostHeader blogPost={blogPost} />
+      <article className="container-article mb-9">
+        {/* Post Header */}
+        <PostHeader blogPost={blogPost} />
 
-      {/* Post body */}
-      <div className="text-lg mt-36">
-        <RichText document={blogPost.body} />
-      </div>
+        {/* Post body */}
+        <div className="text-lg mt-9">
+          <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
+        </div>
+      </article>
 
       {/* Related Post section */}
       <RelatedPosts />
