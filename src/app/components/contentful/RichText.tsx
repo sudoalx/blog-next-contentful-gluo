@@ -107,7 +107,7 @@ const options: CustomOptions = {
         return (
           <Link
             href={`/posts/${node.data.target.fields.slug}`}
-            className="text-blue-500 hover:underline"
+            className="text-blue-500"
           >
             {node.data.target.fields.title}
           </Link>
@@ -125,7 +125,7 @@ const options: CustomOptions = {
           href={node.data.uri}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-blue-500"
         >
           {text}
         </a>
@@ -149,18 +149,29 @@ const options: CustomOptions = {
 
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       return (
-        <ContentfulImage
-          src={node.data.target.fields.file.url}
-          height={node.data.target.fields.file.details.image.height}
-          width={node.data.target.fields.file.details.image.width}
-          alt={node.data.target.fields.title}
-          className="w-full"
-        />
+        <>
+          <ContentfulImage
+            src={node.data.target.fields.file.url}
+            height={node.data.target.fields.file.details.image.height}
+            width={node.data.target.fields.file.details.image.width}
+            alt={node.data.target.fields.title}
+            className="w-full mb-4 mt-8"
+          />
+          // caption text goes after the image
+          <p className="text-sm text-gray-600">
+            {node.data.target.fields.description}
+          </p>
+        </>
       );
     },
   },
 };
 
-export const RichText = ({ document }: any) => {
-  return <div>{documentToReactComponents(document, options)}</div>;
+export const RichText = ({ document, excerpt }: any) => {
+  return (
+    <div className="p-6">
+      <blockquote>{excerpt}</blockquote>
+      {documentToReactComponents(document, options)}
+    </div>
+  );
 };
