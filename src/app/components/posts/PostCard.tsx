@@ -38,8 +38,8 @@ export const Card = async ({
   const author = await fetchAuthorProfileById(authorId);
 
   return (
-    <article className="p-4 border border-gray-200 ">
-      <Link href={slug}>
+    <div className="p-4 border rounded-md border-gray-200 ">
+      <Link href={`/${slug}`}>
         <ContentfulImage
           src={image.src}
           alt={image.alt}
@@ -65,6 +65,6 @@ export const Card = async ({
         </div>
         <p className="text-sm text-gray-500">{readingTime}</p>
       </div>
-    </article>
+    </div>
   );
 };
