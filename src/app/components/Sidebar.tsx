@@ -1,44 +1,21 @@
+import { fetchAllCategories } from "@/contentful/lib/catogories";
 import Link from "next/link";
+import { asm } from "../config/fonts";
 
-const categories = [
-  {
-    id: 1,
-    title: "React",
-  },
-  {
-    id: 2,
-    title: "Next.js",
-  },
-  {
-    id: 3,
-    title: "Tailwind CSS",
-  },
-  {
-    id: 4,
-    title: "TypeScript",
-  },
-  {
-    id: 5,
-    title: "GraphQL",
-  },
-  {
-    id: 6,
-    title: "Node.js",
-  },
-];
+export const Sidebar = async () => {
+  const categories = await fetchAllCategories();
 
-export const Sidebar = () => {
   return (
     <div className="lg:w-1/6 px-4 py-2 border-gray-200 rounded-lg">
-      <h2 className="text-xl font-semibold">Categories</h2>
+      <h2 className={`text-xl font-semibold ${asm.className}`}>Categories</h2>
       <ul className="mt-2">
-        {categories.map((category) => (
-          <li key={category.id} className="mt-2">
+        {categories.map(({ category }) => (
+          <li key={category} className="mt-2">
             <Link
-              href={`/categories/${category.id}`}
-              className="text-blue-500 hover:underline"
+              href={`/category/${category.toLowerCase()}`}
+              className="border-b-4 pb-[2px] border-gray-200 hover:border-[#d2fc51] transition duration-300 ease-in-out"
             >
-              {category.title}
+              {category}
             </Link>
           </li>
         ))}
