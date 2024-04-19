@@ -8,6 +8,7 @@ type BlogPostEntry = Entry<TypePostSkeleton, undefined, string>;
 
 // Our simplified version of a BlogPost.
 // We don't need all the data that Contentful gives us.
+
 export interface BlogPost {
   title: string;
   slug: string;
@@ -19,7 +20,7 @@ export interface BlogPost {
   excerpt: string | null;
   body: RichTextDocument | null;
   authorId?: string;
-  categories?: any[];
+  category?: any;
 }
 
 // A function to transform a Contentful blog post
@@ -47,7 +48,7 @@ export function parseContentfulBlogPost(
       : null,
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
-    categories: blogPostEntry.fields.categories,
+    category: blogPostEntry.fields.category,
   };
 }
 
@@ -85,7 +86,7 @@ export async function fetchBlogPosts({
       excerpt: blogPostEntry.fields.excerpt ?? null,
       body: blogPostEntry.fields.body ?? null,
       authorId: blogPostEntry.fields.author.sys.id,
-      categories: blogPostEntry.fields.categories,
+      category: blogPostEntry.fields.category,
     };
   });
 }

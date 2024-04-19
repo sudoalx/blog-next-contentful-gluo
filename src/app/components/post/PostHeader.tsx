@@ -9,9 +9,9 @@ interface PostHeaderProps {
 }
 
 export const PostHeader = ({ blogPost }: PostHeaderProps) => {
-  const { title, authorId, creationDate, body, featuredImage, categories } =
+  const { title, authorId, creationDate, body, featuredImage, category } =
     blogPost;
-  console.log(categories);
+  console.log(category.fields.category);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 px-2">
@@ -25,6 +25,7 @@ export const PostHeader = ({ blogPost }: PostHeaderProps) => {
           creationDate={creationDate!}
           body={body!}
         />
+        <div>Category: {category.fields.category}</div>
         <div>
           {/* The tags for the blog post */}
           <TagPills />

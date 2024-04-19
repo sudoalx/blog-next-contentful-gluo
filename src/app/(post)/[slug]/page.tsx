@@ -84,12 +84,11 @@ export default async function BlogPage({
         {"/"}
         <Link
           // href={`/category/${blogPost.category.slug}`}
-          href={`/category/Frontend`}
+          href={`/category/${blogPost.category.fields.category.toLowerCase()}`}
           className="text-base mx-4"
           aria-label="View all posts in this category"
         >
-          {/* {blogPost.category.name} */}
-          Frontend
+          {blogPost.category.fields.category}
         </Link>
       </div>
       <article className="container-article mb-9">

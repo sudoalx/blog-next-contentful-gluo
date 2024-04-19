@@ -13,7 +13,7 @@ export interface TypePostFields {
     creationDate: EntryFieldTypes.Date;
     body: EntryFieldTypes.RichText;
     author: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
-    categories: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeCategoriesSkeleton>>;
+    category: EntryFieldTypes.EntryLink<TypeCategoriesSkeleton>;
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, "post">;
