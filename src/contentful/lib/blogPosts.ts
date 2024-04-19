@@ -19,6 +19,7 @@ export interface BlogPost {
   excerpt: string | null;
   body: RichTextDocument | null;
   authorId?: string;
+  categories?: any[];
 }
 
 // A function to transform a Contentful blog post
@@ -46,6 +47,7 @@ export function parseContentfulBlogPost(
       : null,
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
+    categories: blogPostEntry.fields.categories,
   };
 }
 
@@ -61,8 +63,8 @@ export async function fetchBlogPosts({
 
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
-    include: 2,
-    order: ["sys.createdAt"],
+    include: 5,
+    order: ["-fields.creationDate"],
   });
 
   // Map blog post entries to BlogPost objects including author information
@@ -83,12 +85,15 @@ export async function fetchBlogPosts({
       excerpt: blogPostEntry.fields.excerpt ?? null,
       body: blogPostEntry.fields.body ?? null,
       authorId: blogPostEntry.fields.author.sys.id,
+      categories: blogPostEntry.fields.categories,
     };
   });
 }
 
-// A function to fetch blogposts by author
+// A function to fetch blogposts by authorId
 const fetchBlogPostsByAuthor = () => {};
+
+// A function to fetch blogposts by category
 
 // A function to fetch a single blog post by its slug.
 // Optionally uses the Contentful content preview.
@@ -105,8 +110,10 @@ export async function fetchBlogPost({
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
     "fields.slug": slug,
-    include: 2,
+    include: 5,
   });
+
+  console.log(blogPostsResult.items[0]);
 
   return parseContentfulBlogPost(blogPostsResult.items[0]);
 }
