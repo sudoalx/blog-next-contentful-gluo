@@ -1,19 +1,17 @@
+import { BlogPost } from "@/contentful/lib/blogPosts";
 import { PostInfo } from "../metadata/PostInfo";
 import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
 import ContentfulImage from "../ui/ContentfulImage";
-import { Document as RichTextDocument } from "@contentful/rich-text-types";
 
-interface NextImageProps {
-  alt: string;
-  src: string;
-  height: number;
-  width: number;
-  className?: string;
+interface PostHeaderProps {
+  blogPost: BlogPost;
 }
 
-export const PostHeader = ({ blogPost }: any) => {
-  const { title, authorId, creationDate, body, featuredImage } = blogPost;
+export const PostHeader = ({ blogPost }: PostHeaderProps) => {
+  const { title, authorId, creationDate, body, featuredImage, categories } =
+    blogPost;
+  console.log(categories);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 px-2">
@@ -22,7 +20,11 @@ export const PostHeader = ({ blogPost }: any) => {
         {/* The blog post title */}
         <h1 className="text-4xl font-bold">{title}</h1>
         {/* The blog post info */}
-        <PostInfo authorId={authorId} creationDate={creationDate} body={body} />
+        <PostInfo
+          authorId={authorId!}
+          creationDate={creationDate!}
+          body={body!}
+        />
         <div>
           {/* The tags for the blog post */}
           <TagPills />
