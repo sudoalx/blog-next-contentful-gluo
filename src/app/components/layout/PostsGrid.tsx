@@ -1,10 +1,11 @@
-import { draftMode } from "next/headers";
-import { fetchBlogPosts } from "../../../contentful/lib/blogPosts";
+import { BlogPost } from "../../../contentful/lib/blogPosts";
 import { Card } from "../posts/PostCard";
 
-export const Grid = async () => {
-  const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
+interface GridProps {
+  blogPosts: BlogPost[];
+}
 
+export const Grid = async ({ blogPosts }: GridProps) => {
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

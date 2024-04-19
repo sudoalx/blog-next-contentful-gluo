@@ -1,8 +1,11 @@
 import { Grid } from "@/app/components/layout/PostsGrid";
 import { Sidebar } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
+import { fetchBlogPosts } from "@/contentful/lib/blogPosts";
+import { draftMode } from "next/headers";
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
   return (
     <main className="container mx-auto mb-10">
       {/* Blog homepage */}
@@ -12,7 +15,7 @@ export default function Home() {
       </h1>
       <div className="p-4 flex flex-col lg:flex lg:flex-row gap-2">
         {/* Grid of articles */}
-        <Grid />
+        <Grid blogPosts={blogPosts} />
         {/* Sidebar */}
         <Sidebar />
       </div>
