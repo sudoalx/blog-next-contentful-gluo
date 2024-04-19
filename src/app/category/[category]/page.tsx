@@ -32,11 +32,11 @@ export default async function CategoriesPage({
         <SlArrowRight className="inline text-2xl" />
         <span className="mx-4 capitalize">{decodeURI(category)}</span>
       </div>
-      <div className="p-4 flex flex-col lg:flex lg:flex-row gap-2">
+      <div className="p-4 flex flex-col-reverse lg:flex lg:flex-row gap-2">
         {/* Grid of articles */}
         <Grid blogPosts={blogPosts} />
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar params={params} />
       </div>
     </main>
   );
