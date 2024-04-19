@@ -1,5 +1,6 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 import type { TypeAuthorSkeleton } from "./TypeAuthor";
+import type { TypeCategoriesSkeleton } from "./TypeCategories";
 
 export interface TypePostFields {
     title: EntryFieldTypes.Symbol;
@@ -12,6 +13,7 @@ export interface TypePostFields {
     creationDate: EntryFieldTypes.Date;
     body: EntryFieldTypes.RichText;
     author: EntryFieldTypes.EntryLink<TypeAuthorSkeleton>;
+    categories: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeCategoriesSkeleton>>;
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, "post">;
