@@ -16,7 +16,6 @@ export interface BlogPost {
   metaDescription: string | null;
   metaKeywords: string[] | null;
   creationDate: Date | null;
-  readingTime: number | null;
   excerpt: string | null;
   body: RichTextDocument | null;
   authorId?: string;
@@ -45,7 +44,6 @@ export function parseContentfulBlogPost(
     creationDate: blogPostEntry.fields.creationDate
       ? new Date(blogPostEntry.fields.creationDate)
       : null,
-    readingTime: blogPostEntry.fields.readingTime ?? null,
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
   };
@@ -82,7 +80,6 @@ export async function fetchBlogPosts({
       creationDate: blogPostEntry.fields.creationDate
         ? new Date(blogPostEntry.fields.creationDate)
         : null,
-      readingTime: blogPostEntry.fields.readingTime ?? null,
       excerpt: blogPostEntry.fields.excerpt ?? null,
       body: blogPostEntry.fields.body ?? null,
       authorId: blogPostEntry.fields.author.sys.id,
