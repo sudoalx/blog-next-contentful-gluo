@@ -6,6 +6,8 @@ import { RichText } from "@/app/components/contentful/RichText";
 import { RelatedPosts } from "@/app/components/post/RelatedPosts";
 import { PostHeader } from "@/app/components/post/PostHeader";
 import { DisqusComments } from "@/app/components/post/DisqusComments";
+import Link from "next/link";
+import { asm } from "@/app/config/fonts";
 
 interface BlogPostPageParams {
   slug: string;
@@ -75,6 +77,21 @@ export default async function BlogPage({
 
   return (
     <>
+      <div className={`${asm.className} my-10`}>
+        <Link href="/" className="text-base mx-4" aria-label="Back to blog">
+          Blog
+        </Link>
+        {"/"}
+        <Link
+          // href={`/category/${blogPost.category.slug}`}
+          href={`/category/Frontend`}
+          className="text-base mx-4"
+          aria-label="View all posts in this category"
+        >
+          {/* {blogPost.category.name} */}
+          Frontend
+        </Link>
+      </div>
       <article className="container-article mb-9">
         {/* Post Header */}
         <PostHeader blogPost={blogPost} />
