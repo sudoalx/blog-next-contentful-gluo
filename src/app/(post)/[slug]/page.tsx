@@ -83,9 +83,8 @@ export default async function BlogPage({
         </Link>
         {"/"}
         <Link
-          // href={`/category/${blogPost.category.slug}`}
           href={`/category/${blogPost.category.fields.category.toLowerCase()}`}
-          className="text-base mx-4"
+          className="text-base mx-4 capitalize"
           aria-label="View all posts in this category"
         >
           {blogPost.category.fields.category}

@@ -1,41 +1,19 @@
 import Link from "next/link";
 
-export const TagPills = () => {
+export const TagPills = ({ tags }: { tags: string[] }) => {
   return (
     <div>
       <ul className="flex gap-2 sm:gap-4 mt-4 flex-wrap">
-        <li className="mt-4 text-nowrap">
-          <Link
-            href="/tags/tag-1"
-            className="border bg-gray-200 rounded-full px-3 py-2 text-xs"
-          >
-            Tag 1
-          </Link>
-        </li>
-        <li className="mt-4 text-nowrap">
-          <Link
-            href="/tags/tag-2"
-            className="border bg-gray-200 rounded-full px-3 py-2 text-xs"
-          >
-            Tag 2
-          </Link>
-        </li>
-        <li className="mt-4 text-nowrap">
-          <Link
-            href="/tags/tag-3"
-            className="border bg-gray-200 rounded-full px-3 py-2 text-xs"
-          >
-            Tag 3
-          </Link>
-        </li>
-        <li className="mt-4 text-nowrap">
-          <Link
-            href="/tags/tag-4"
-            className="border bg-gray-200 rounded-full px-3 py-2 text-xs"
-          >
-            Tag 4
-          </Link>
-        </li>
+        {tags.map((tag: string) => (
+          <li key={tag}>
+            <Link
+              href={`/tags/${tag}`}
+              className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded-md"
+            >
+              {tag}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );

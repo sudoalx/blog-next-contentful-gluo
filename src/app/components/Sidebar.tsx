@@ -1,6 +1,6 @@
 import { fetchAllCategories } from "@/contentful/lib/catogories";
-import Link from "next/link";
 import { asm } from "../config/fonts";
+import { SidebarLink } from "./SidebarLink";
 
 interface CategoriesPageProps {
   params: {
@@ -17,20 +17,10 @@ export const Sidebar = async ({ params }: Readonly<CategoriesPageProps>) => {
       <h2 className={`text-xl font-semibold hidden lg:block ${asm.className}`}>
         Categories
       </h2>
-      <ul className="mt-2 flex gap-4 lg:block flex-wrap">
+      <ul className="mt-2 flex gap-4 lg:block flex-wrap capitalize">
         {categories.map(({ category }) => (
           <li key={category} className="mt-2">
-            <Link
-              href={`/category/${category.toLowerCase()}`}
-              className={`border-b-4 pb-[2px] border-gray-200 hover:border-[#d2fc51] transition duration-300 ease-in-out ${
-                decodeURI(activeCategory).toLowerCase() ===
-                category.toLowerCase()
-                  ? "border-[#d2fc51]"
-                  : ""
-              }`}
-            >
-              {category}
-            </Link>
+            <SidebarLink category={category} activeCategory={activeCategory} />
           </li>
         ))}
       </ul>

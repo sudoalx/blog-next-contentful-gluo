@@ -3,6 +3,7 @@ import { PostInfo } from "../metadata/PostInfo";
 import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
 import ContentfulImage from "../ui/ContentfulImage";
+import Link from "next/link";
 
 interface PostHeaderProps {
   blogPost: BlogPost;
@@ -11,7 +12,8 @@ interface PostHeaderProps {
 export const PostHeader = ({ blogPost }: PostHeaderProps) => {
   const { title, authorId, creationDate, body, featuredImage, category } =
     blogPost;
-  console.log(category.fields.category);
+
+  const categoryString = category.fields.category;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 px-2">
@@ -25,11 +27,15 @@ export const PostHeader = ({ blogPost }: PostHeaderProps) => {
           creationDate={creationDate!}
           body={body!}
         />
-        <div>Category: {category.fields.category}</div>
-        <div>
-          {/* The tags for the blog post */}
-          <TagPills />
+        <div className="flex gap-2 sm:gap-4 mt-4 flex-wrap">
+          <Link
+            href={`/category/${categoryString.toLowerCase()}`}
+            className="border bg-gray-200 rounded-full px-3 py-2 text-xs capitalize"
+          >
+            {categoryString}
+          </Link>
         </div>
+
         {/* The share buttons */}
         <ShareButtons title={title} />
       </div>

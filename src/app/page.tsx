@@ -11,6 +11,7 @@ interface CategoriesPageProps {
 }
 export default async function Home({ params }: Readonly<CategoriesPageProps>) {
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
+  
   return (
     <main className="container mx-auto mb-10">
       {/* Blog homepage */}

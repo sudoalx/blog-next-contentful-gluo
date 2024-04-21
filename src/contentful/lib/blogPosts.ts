@@ -114,7 +114,5 @@ export async function fetchBlogPost({
     include: 5,
   });
 
-  console.log(blogPostsResult.items[0]);
-
   return parseContentfulBlogPost(blogPostsResult.items[0]);
 }

@@ -21,16 +21,18 @@ export default async function CategoriesPage({
     <main className="container mx-auto mb-10">
       {/* Blog category page */}
       {/* Blog category title */}
-      <div className={`${einaLight.className} my-10 text-4xl`}>
+      <div
+        className={`${einaLight.className} flex flex-wrap items-end gap-4 my-10 px-4 text-4xl`}
+      >
         <Link
           href="/"
-          className="mx-4 hover:text-blue-600"
+          className=" hover:text-blue-600"
           aria-label="Back to blog"
         >
           Blog
         </Link>
-        <SlArrowRight className="inline text-2xl" />
-        <span className="mx-4 capitalize">{decodeURI(category)}</span>
+        <SlArrowRight className="inline text-3xl  " />
+        <span className="capitalize">{decodeURI(category)}</span>
       </div>
       <div className="p-4 flex flex-col-reverse lg:flex lg:flex-row gap-2">
         {/* Grid of articles */}
