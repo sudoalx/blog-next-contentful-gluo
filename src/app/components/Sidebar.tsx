@@ -17,13 +17,21 @@ export const Sidebar = async ({ params }: Readonly<CategoriesPageProps>) => {
       <h2 className={`text-xl font-semibold hidden lg:block ${asm.className}`}>
         Categories
       </h2>
-      <ul className="mt-2 flex gap-4 lg:block flex-wrap capitalize">
-        {categories.map(({ category }) => (
-          <li key={category} className="mt-2">
-            <SidebarLink category={category} activeCategory={activeCategory} />
-          </li>
-        ))}
-      </ul>
+      <div className="mt-2 lg:block flex-wrap capitalize whitespace-nowrap">
+        <ul
+          className="flex gap-4 overflow-x-auto pb-4"
+          style={{ overflowY: "hidden", boxSizing: "border-box" }}
+        >
+          {categories.map(({ category }) => (
+            <li key={category} className="mt-2">
+              <SidebarLink
+                category={category}
+                activeCategory={activeCategory}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
