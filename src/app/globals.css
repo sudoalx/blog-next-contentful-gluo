@@ -6,6 +6,44 @@
   --color-primary: #0482de;
 }
 
+/* For WebKit (Chrome, Safari, etc.) */
+/* Vertical scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Adjust the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Change to your desired background color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d2fc51; /* Change to your desired scrollbar color */
+  border-radius: 3px; /* Optional: Add border radius for a rounded scrollbar thumb */
+}
+
+/* Horizontal scrollbar */
+::-webkit-scrollbar {
+  height: 3px; /* Adjust the height of the scrollbar for horizontal scrolling */
+}
+
+/* For Firefox */
+/* Note: Firefox does not currently support styling of scrollbar thumb */
+/* You can use this for customizing the track color */
+/* However, scrollbar thumb styling is not supported in Firefox */
+/* You may need to use a JavaScript-based solution for Firefox */
+
+/*::-moz-scrollbar {
+  height: 6px;
+}
+
+::-moz-scrollbar-track {
+  background-color: transparent;
+}*/
+
+/* For Internet Explorer/Edge */
+/* Note: Internet Explorer/Edge does not currently support styling of scrollbar */
+/* You may need to use a JavaScript-based solution for Internet Explorer/Edge */
+
 .eina {
   font-family: var(--font-eina);
 }
