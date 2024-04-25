@@ -1,16 +1,17 @@
 "use client";
 import { BlogPost } from "@/contentful/lib/blogPosts";
 import { DiscussionEmbed } from "disqus-react";
+import siteConfig from "../../../../config/site.config";
 
 interface DisqusCommentsProps {
   post: BlogPost;
 }
 
 export const DisqusComments = ({ post }: DisqusCommentsProps) => {
-  const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+  const pageUrl = `${siteConfig.url}posts/${post.slug}`;
   const disqusConfig = {
     url: pageUrl,
-    identifier: post.title,
+    identifier: post.slug,
     title: post.title,
   };
   return <DiscussionEmbed shortname="gluo-dev-blog" config={disqusConfig} />;
