@@ -16,7 +16,7 @@ export const SidebarLink = ({ category, activeCategory }: SidebarLinkProps) => {
         isActive ? "border-[#d2fc51]" : "border-gray-200"
       }`}
     >
-      {category}
+      {category.replaceAll("-", " ")}
     </Link>
   );
 };

@@ -12,7 +12,7 @@ export const TagPills = ({ slug, tags }: TagPillsProps) => {
         {tags.map((tag: string) => (
           <li key={tag}>
             <Link
-              href={`/${slug}/${tag}`}
+              href={`/${slug}/${tag.replace(" ", "-").toLowerCase()}`}
               className="px-4 py-2 bg-[#F4F4F0] text-xs hover:bg-gray-300 rounded-full capitalize"
             >
               {tag}

@@ -99,6 +99,8 @@ export default async function BlogPage({
           <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
         </div>
       </article>
+
+      {/* Disqus comments section */}
       <DisqusComments post={blogPost} />
 
       {/* Related Post section */}
