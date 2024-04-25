@@ -9,6 +9,8 @@ import ContentfulImage from "../ui/ContentfulImage";
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/app/config";
+import slugify from "slugify";
+import { getPlainTextFromHeader } from "../post/TableOfContent";
 
 // Define custom options type
 type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {
@@ -31,7 +33,10 @@ const options: CustomOptions = {
       return <h1>{children}</h1>;
     },
     [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => {
-      return <h2>{children}</h2>;
+      // Get the plain text from the header
+      const plainText = getPlainTextFromHeader(node.content);
+      // Return the header with an ID attribute
+      return <h2 id={slugify(plainText)}>{children}</h2>;
     },
     [BLOCKS.HEADING_3]: (node: any, children: ReactNode) => {
       return <h3>{children}</h3>;

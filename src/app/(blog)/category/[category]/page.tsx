@@ -4,7 +4,7 @@ import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPostsByCategory } from "@/contentful/lib/blogPosts";
 import { fetchAllCategories } from "@/contentful/lib/catogories";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { SlArrowRight } from "react-icons/sl";
 
 interface CategoriesPageProps {
@@ -50,7 +50,7 @@ export default async function CategoriesPage({
 
   // If no blog posts are found, return a 404 page
   if (!blogPosts.length) {
-    return notFound();
+    return redirect("/");
   }
 
   return (
