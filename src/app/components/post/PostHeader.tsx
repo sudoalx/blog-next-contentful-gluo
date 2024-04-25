@@ -4,7 +4,7 @@ import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
 import ContentfulImage from "../ui/ContentfulImage";
 import Link from "next/link";
-import siteConfig from "../../../../config/site.config";
+import siteConfig from "@/../config/site.config";
 
 interface PostHeaderProps {
   blogPost: BlogPost;

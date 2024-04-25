@@ -11,7 +11,7 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
 } from "react-share";
-import siteConfig from "../../../../config/site.config";
+import siteConfig from "@/../config/site.config";
 
 interface ShareButtonsProps {
   url?: string;

@@ -4,7 +4,7 @@ import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import ContentfulImage from "../ui/ContentfulImage";
 import { formatDate } from "@/lib/utils";
-import siteConfig from "../../../../config/site.config";
+import siteConfig from "@/../config/site.config";
 
 interface CardProps {
   title: string;
