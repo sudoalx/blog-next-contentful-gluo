@@ -6,7 +6,7 @@ import {
 } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import ContentfulImage from "../ui/ContentfulImage";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import Link from "next/link";
 
 // Define custom options type
@@ -27,49 +27,25 @@ const options: CustomOptions = {
   },
   renderNode: {
     [BLOCKS.HEADING_1]: (node: any, children: ReactNode) => {
-      return (
-        <h1 className="text-4xl font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h1>
-      );
+      return <h1>{children}</h1>;
     },
     [BLOCKS.HEADING_2]: (node: any, children: ReactNode) => {
-      return (
-        <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h2>
-      );
+      return <h2>{children}</h2>;
     },
     [BLOCKS.HEADING_3]: (node: any, children: ReactNode) => {
-      return (
-        <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h3>
-      );
+      return <h3>{children}</h3>;
     },
     [BLOCKS.HEADING_4]: (node: any, children: ReactNode) => {
-      return (
-        <h4 className="text-xl font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h4>
-      );
+      return <h4>{children}</h4>;
     },
     [BLOCKS.HEADING_5]: (node: any, children: ReactNode) => {
-      return (
-        <h5 className="text-lg font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h5>
-      );
+      return <h5>{children}</h5>;
     },
     [BLOCKS.HEADING_6]: (node: any, children: ReactNode) => {
-      return (
-        <h6 className="text-base font-bold text-gray-900 mb-4 mt-8">
-          {children}
-        </h6>
-      );
+      return <h6>{children}</h6>;
     },
     [BLOCKS.UL_LIST]: (node: any, children: ReactNode) => {
-      return <ul className="list-disc list-inside inline-block">{children}</ul>;
+      return <ul className="list-disc list-inside">{children}</ul>;
     },
     [BLOCKS.OL_LIST]: (node: any, children: ReactNode) => {
       return (
@@ -77,8 +53,21 @@ const options: CustomOptions = {
       );
     },
     [BLOCKS.LIST_ITEM]: (node: any, children: ReactNode) => {
-      return <li className="text-gray-700 mb-2">{children}</li>;
+      return (
+        <li className="text-gray-700 mb-2">
+          {React.Children.map(children, (child) => {
+            // If child is a string (text node), wrap it in a span
+            if (React.isValidElement(child)) {
+              return (
+                <span className="whitespace-normal">{child.props.children}</span>
+              );
+            }
+            return child;
+          })}
+        </li>
+      );
     },
+
     [BLOCKS.QUOTE]: (node: any, children: ReactNode) => {
       return <blockquote>{children}</blockquote>;
     },
@@ -106,7 +95,7 @@ const options: CustomOptions = {
       if (node.data.target.sys.contentType.sys.id === "post") {
         return (
           <Link
-            href={`/posts/${node.data.target.fields.slug}`}
+            href={`/${node.data.target.fields.slug}`}
             className="text-blue-500"
           >
             {node.data.target.fields.title}
@@ -180,7 +169,7 @@ const options: CustomOptions = {
 export const RichText = ({ document, excerpt }: any) => {
   return (
     <div className="p-6">
-      <blockquote>{excerpt}</blockquote>
+      {excerpt && <blockquote>{excerpt}</blockquote>}
       {documentToReactComponents(document, options)}
     </div>
   );
