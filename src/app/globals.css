@@ -44,6 +44,37 @@
 /* Note: Internet Explorer/Edge does not currently support styling of scrollbar */
 /* You may need to use a JavaScript-based solution for Internet Explorer/Edge */
 
+h1,
+.h1 {
+  @apply text-4xl text-gray-900 font-bold mb-4 mt-8;
+}
+
+h2,
+.h2 {
+  @apply text-3xl text-gray-900 font-bold mb-4 mt-8;
+}
+
+h3,
+.h3 {
+  @apply text-2xl text-gray-900 font-bold mb-4 mt-8;
+}
+
+h4,
+.h4 {
+  @apply text-xl text-gray-900 font-bold mb-4 mt-8;
+}
+
+h5,
+.h5 {
+  @apply text-lg text-gray-900 font-bold mb-4 mt-8;
+}
+
+h6,
+.h6 {
+  @apply text-base text-gray-900 font-bold mb-4 mt-8;
+}
+
+/* Fonts */
 .eina {
   font-family: var(--font-eina);
 }
