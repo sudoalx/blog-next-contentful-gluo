@@ -13,9 +13,26 @@ export default {
   // The URL of the site
   url: "https://blog-next-contentful-gluo.vercel.app/",
 
-  shareMenu: {
-    // Enable or disable the share menu
-    enabled: true,
-    Text: "Share this post!",
+  // Post page settings
+  post: {
+    // Show the author profile picture
+    showAuthorProfilePicture: true,
+    // Share menu settings
+    shareMenu: {
+      enabled: true,
+      Text: "Share this post!",
+      socialMedia: {
+        linkedin: true,
+        twitter: true,
+        facebook: true,
+        copyLink: true,
+      },
+    },
+    // Show excerpt as quoteblock in the post
+    showExcerptAsQuote: false,
+  },
+
+  author: {
+    showProfilePicture: true,
   },
 };

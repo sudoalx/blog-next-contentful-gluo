@@ -8,6 +8,7 @@ import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import ContentfulImage from "../ui/ContentfulImage";
 import React, { ReactNode } from "react";
 import Link from "next/link";
+import siteConfig from "../../../../config/site.config";
 
 // Define custom options type
 type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {
@@ -169,7 +170,9 @@ const options: CustomOptions = {
 export const RichText = ({ document, excerpt }: any) => {
   return (
     <div className="p-6">
-      {excerpt && <blockquote>{excerpt}</blockquote>}
+      {siteConfig.post.showExcerptAsQuote && excerpt && (
+        <blockquote>{excerpt}</blockquote>
+      )}
       {documentToReactComponents(document, options)}
     </div>
   );

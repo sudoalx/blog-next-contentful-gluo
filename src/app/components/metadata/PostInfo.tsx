@@ -3,6 +3,7 @@ import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import Link from "next/link";
 import ContentfulImage from "../ui/ContentfulImage";
+import siteConfig from "../../../../config/site.config";
 
 interface PostInfoProps {
   creationDate: Date;
@@ -29,10 +30,12 @@ export const PostInfo = async ({
           href={`/author/${author.slug}`}
           className="flex items-center text-xs text-gray-500"
         >
-          <ContentfulImage
-            {...author.photo!}
-            className="rounded-full h-6 w-6 mr-2"
-          />
+          {siteConfig.author.showProfilePicture && (
+            <ContentfulImage
+              {...author.photo!}
+              className="rounded-full h-6 w-6 mr-2"
+            />
+          )}
           {author.fullName}
         </Link>
       </div>

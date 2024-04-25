@@ -4,6 +4,7 @@ import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import ContentfulImage from "../ui/ContentfulImage";
 import { formatDate } from "@/lib/utils";
+import siteConfig from "../../../../config/site.config";
 
 interface CardProps {
   title: string;
@@ -56,10 +57,12 @@ export const Card = async ({
         <p className="text-sm text-gray-500">{formatDate(date)}</p>
         <div className="flex items-center">
           <Link href={`/author/${author.slug}`} className="flex items-center">
-            <ContentfulImage
-              {...author.photo!}
-              className="rounded-full h-6 w-6 mr-2"
-            />
+            {siteConfig.author.showProfilePicture && (
+              <ContentfulImage
+                {...author.photo!}
+                className="rounded-full h-6 w-6 mr-2"
+              />
+            )}
             <p className="mr-2">{author?.fullName}</p>
           </Link>
         </div>

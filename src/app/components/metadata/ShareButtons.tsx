@@ -27,7 +27,7 @@ export const ShareButtons = ({ url, title }: ShareButtonsProps) => {
   return (
     <div className="flex gap-4 mt-12 mb-6 align-middle">
       <span className="flex items-center text-sm text-gray-500">
-        {siteConfig.shareMenu.Text}
+        {siteConfig.post.shareMenu.Text}
       </span>
       <LinkedinShareButton url={url ?? currentUrl!} title={title}>
         <FaLinkedin size={25} className="text-gray-500 hover:text-blue-500" />
