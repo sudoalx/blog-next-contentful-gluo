@@ -59,7 +59,9 @@ const options: CustomOptions = {
             // If child is a string (text node), wrap it in a span
             if (React.isValidElement(child)) {
               return (
-                <span className="whitespace-normal">{child.props.children}</span>
+                <span className="whitespace-normal">
+                  {child.props.children}
+                </span>
               );
             }
             return child;
@@ -81,11 +83,9 @@ const options: CustomOptions = {
         )
       ) {
         return (
-          <div>
-            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
-              <code className="text-sm font-mono">{children}</code>
-            </pre>
-          </div>
+          <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+            <code className="text-sm font-mono">{children}</code>
+          </pre>
         );
       }
       return <p className="text-gray-800 mb-4">{children}</p>;

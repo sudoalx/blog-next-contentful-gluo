@@ -4,6 +4,7 @@ import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
 import ContentfulImage from "../ui/ContentfulImage";
 import Link from "next/link";
+import siteConfig from "../../../../config/site.config";
 
 interface PostHeaderProps {
   blogPost: BlogPost;
@@ -37,7 +38,7 @@ export const PostHeader = ({ blogPost }: PostHeaderProps) => {
         </div>
 
         {/* The share buttons */}
-        <ShareButtons title={title} />
+        {siteConfig.shareMenu.enabled && <ShareButtons title={title} />}
       </div>
       {/* Top right section */}
       <div className="flex justify-end">

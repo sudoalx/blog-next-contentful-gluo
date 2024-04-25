@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Navbar } from "./components";
 import { eina } from "./config/fonts";
-
-const inter = Inter({ subsets: ["latin"] });
+import siteConfig from "../../config/site.config";
 
 export const metadata: Metadata = {
-  title: "Gluo Dev Blog",
-  description: "A blog for developers at Gluo",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({

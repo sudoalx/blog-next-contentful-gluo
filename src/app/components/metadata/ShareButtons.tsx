@@ -11,6 +11,7 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
 } from "react-share";
+import siteConfig from "../../../../config/site.config";
 
 interface ShareButtonsProps {
   url?: string;
@@ -25,7 +26,9 @@ export const ShareButtons = ({ url, title }: ShareButtonsProps) => {
 
   return (
     <div className="flex gap-4 mt-12 mb-6 align-middle">
-      <span className="flex items-center text-sm text-gray-500">Share!</span>
+      <span className="flex items-center text-sm text-gray-500">
+        {siteConfig.shareMenu.Text}
+      </span>
       <LinkedinShareButton url={url ?? currentUrl!} title={title}>
         <FaLinkedin size={25} className="text-gray-500 hover:text-blue-500" />
       </LinkedinShareButton>
