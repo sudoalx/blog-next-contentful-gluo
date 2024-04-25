@@ -9,6 +9,7 @@ import { DisqusComments } from "@/app/components/post/DisqusComments";
 import Link from "next/link";
 import { asm } from "@/app/config/fonts";
 import { TableOfContents } from "@/app/components/post/TableOfContent";
+import { siteConfig } from "@/app/config";
 
 interface BlogPostPageParams {
   slug: string;
@@ -98,7 +99,11 @@ export default async function BlogPage({
         {/* Post Header */}
         <PostHeader blogPost={blogPost} />
 
-        <div className="text-lg mt-9 flex flex-wrap flex-col-reverse md:flex-row justify-between">
+        <div
+          className={`text-lg mt-9 flex flex-wrap flex-col-reverse justify-between md:flex-row${
+            siteConfig.post.positionTableOfContents == "right" ? "" : "-reverse"
+          } `}
+        >
           {/* Post body */}
           <div className="w-full md:w-3/4 lg:w-3/4 mx-auto">
             <RichText document={blogPost.body} excerpt={blogPost.excerpt} />

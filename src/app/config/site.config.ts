@@ -30,6 +30,8 @@ export const siteConfig = {
     },
     // Show excerpt as quoteblock in the post
     showExcerptAsQuote: false,
+    // Show the table of contents to the left or right of the post
+    positionTableOfContents: "right", // left or right
   },
 
   author: {
