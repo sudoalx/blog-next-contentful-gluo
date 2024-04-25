@@ -4,7 +4,6 @@ import {
   fetchAuthorProfiles,
 } from "@/contentful/lib/authorProfile";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
