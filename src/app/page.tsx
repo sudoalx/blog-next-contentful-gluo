@@ -3,6 +3,7 @@ import { Sidebar } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPosts } from "@/contentful/lib/blogPosts";
 import { draftMode } from "next/headers";
+import { fetchAllCategories } from "@/contentful/lib/catogories";
 
 interface CategoriesPageProps {
   params: {
@@ -11,6 +12,7 @@ interface CategoriesPageProps {
 }
 export default async function Home({ params }: Readonly<CategoriesPageProps>) {
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
+  const categories = await fetchAllCategories();
 
   return (
     <main className="container mx-auto mb-10">
@@ -25,7 +27,7 @@ export default async function Home({ params }: Readonly<CategoriesPageProps>) {
         {/* Grid of articles */}
         <Grid blogPosts={blogPosts} />
         {/* Sidebar */}
-        <Sidebar params={params} />
+        <Sidebar categories={categories} params={params} />
       </div>
     </main>
   );

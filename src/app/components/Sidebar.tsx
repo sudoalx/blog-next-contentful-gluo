@@ -1,15 +1,18 @@
-import { fetchAllCategories } from "@/contentful/lib/catogories";
+import { Category } from "@/contentful/lib/catogories";
 import { asm } from "../config/fonts";
 import { SidebarLink } from "./SidebarLink";
 
 interface CategoriesPageProps {
+  categories: Category[];
   params: {
     category: string;
   };
 }
 
-export const Sidebar = async ({ params }: Readonly<CategoriesPageProps>) => {
-  const categories = await fetchAllCategories();
+export const Sidebar = async ({
+  categories = [],
+  params,
+}: Readonly<CategoriesPageProps>) => {
   const { category: activeCategory } = params;
 
   return (

@@ -1,5 +1,5 @@
 import { TypePostSkeleton } from "../types";
-import { Entry } from "contentful";
+import { Asset, AssetLink, Entry } from "contentful";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import contentfulClient from "./contentfulClient";
 import { ContentImage, parseContentfulContentImage } from "./contentImage";
@@ -95,6 +95,59 @@ export async function fetchBlogPosts({
 const fetchBlogPostsByAuthor = () => {};
 
 // A function to fetch blogposts by category
+export const fetchBlogPostsByCategory = async (
+  categoryId: string | null
+): Promise<BlogPost[]> => {
+  // If no categoryId is provided, return an empty array
+  if (!categoryId) {
+    return [];
+  }
+
+  const contentful = contentfulClient({ preview: false });
+  const blogPostsResult = contentful.getEntries<TypePostSkeleton>({
+    content_type: "post",
+    "fields.category.sys.id": categoryId,
+    include: 5,
+  });
+  return (await blogPostsResult).items.map(
+    (blogPostEntry: {
+      fields: {
+        title: any;
+        slug: any;
+        thumbnail: Asset<undefined, string> | { sys: AssetLink } | undefined;
+        featuredImage:
+          | Asset<undefined, string>
+          | { sys: AssetLink }
+          | undefined;
+        metaDescription: any;
+        metaKeywords: any;
+        creationDate: string | number | Date;
+        excerpt: any;
+        body: any;
+        author: { sys: { id: any } };
+        category: any;
+      };
+    }) => {
+      return {
+        title: blogPostEntry.fields.title || "",
+        slug: blogPostEntry.fields.slug || "",
+        thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+        featuredImage: parseContentfulContentImage(
+          blogPostEntry.fields.featuredImage
+        ),
+        metaDescription: blogPostEntry.fields.metaDescription ?? null,
+        metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+        creationDate: blogPostEntry.fields.creationDate
+          ? new Date(blogPostEntry.fields.creationDate)
+          : null,
+        excerpt: blogPostEntry.fields.excerpt ?? null,
+        body: blogPostEntry.fields.body ?? null,
+        authorId: blogPostEntry.fields.author.sys.id,
+        category: blogPostEntry.fields.category,
+      };
+    }
+  );
+};
 
 // A function to fetch a single blog post by its slug.
 // Optionally uses the Contentful content preview.

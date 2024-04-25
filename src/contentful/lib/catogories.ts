@@ -7,6 +7,7 @@ type CategoryEntry = Entry<TypeCategoriesSkeleton, undefined, string>;
 // Category interface
 export interface Category {
   category: string;
+  categoryId: string;
 }
 
 // A function to transform a Contentful category entry
@@ -17,8 +18,10 @@ export function parseContentfulCategory(
   if (!category) {
     return null;
   }
+
   return {
     category: category.fields.category,
+    categoryId: category.sys.id,
   };
 }
 

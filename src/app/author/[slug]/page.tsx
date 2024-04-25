@@ -1,3 +1,4 @@
+import { RichText } from "@/app/components/contentful/RichText";
 import {
   fetchAuthorProfile,
   fetchAuthorProfiles,
@@ -58,15 +59,25 @@ export default async function AuthorPage({
   }
 
   return (
-    <div>
-      <Image
-        {...author.photo!} // Spread the properties of author.photo directly into the Image component
-        src={`https:${author.photo?.src}`} // Assuming `src` is a string representing the image URL
-      />
-      <h1>{author.fullName}</h1>
-
-      <div>{documentToReactComponents(author.biography!)}</div>
-      {/* Render author details as needed */}
+    <div className="container mx-auto px-4 py-8">
+      {/* Display profile picture & full name */}
+      <div className="flex items-center space-x-4 flex-col">
+        <Image
+          {...author.photo!} // Spread the properties of author.photo directly into the Image component
+          src={`https:${author.photo?.src}`} // Assuming `src` is a string representing the image URL
+          className="rounded-full w-36 h-36"
+        />
+        <h1 className="border-b-4 border-[#d2fc51] text-3xl font-bold text-center">
+          {author.fullName}
+        </h1>
+      </div>
+      {/* Profile bio */}
+      <div className="mt-4 text-lg text-gray-700">
+        <h2 className="px-6">
+          <span className="text-2xl font-bold">Biography</span>
+        </h2>
+        <RichText document={author.biography} />
+      </div>
     </div>
   );
 }
