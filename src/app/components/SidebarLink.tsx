@@ -7,7 +7,8 @@ interface SidebarLinkProps {
 
 export const SidebarLink = ({ category, activeCategory }: SidebarLinkProps) => {
   const isActive =
-    category.toLowerCase() === decodeURI(activeCategory).toLowerCase();
+    category.toLowerCase() ===
+    decodeURI(activeCategory).toLowerCase().replaceAll("-", " ");
   return (
     <Link
       href={`/category/${category.toLowerCase().replaceAll(" ", "-")}`}
