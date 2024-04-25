@@ -8,7 +8,7 @@ import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import ContentfulImage from "../ui/ContentfulImage";
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import siteConfig from "@/../config/site.config";
+import { siteConfig } from "@/app/config";
 
 // Define custom options type
 type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {

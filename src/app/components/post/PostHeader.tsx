@@ -3,8 +3,7 @@ import { PostInfo } from "../metadata/PostInfo";
 import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
 import ContentfulImage from "../ui/ContentfulImage";
-import Link from "next/link";
-import siteConfig from "@/../config/site.config";
+import { siteConfig } from "@/app/config";
 
 interface PostHeaderProps {
   blogPost: BlogPost;

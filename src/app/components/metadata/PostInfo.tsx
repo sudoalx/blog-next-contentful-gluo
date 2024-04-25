@@ -3,7 +3,7 @@ import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import Link from "next/link";
 import ContentfulImage from "../ui/ContentfulImage";
-import siteConfig from "@/../config/site.config";
+import { siteConfig } from "@/app/config";
 
 interface PostInfoProps {
   creationDate: Date;

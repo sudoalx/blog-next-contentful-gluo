@@ -3,7 +3,7 @@
  * You can toggle the features of the site here.
  */
 
-export default {
+export const siteConfig = {
   // The title of the site
   title: "Gluo Dev Blog",
 

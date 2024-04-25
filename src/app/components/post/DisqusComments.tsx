@@ -1,7 +1,7 @@
 "use client";
 import { BlogPost } from "@/contentful/lib/blogPosts";
 import { DiscussionEmbed } from "disqus-react";
-import siteConfig from "@/../config/site.config";
+import {siteConfig} from "@/app/config";
 
 interface DisqusCommentsProps {
   post: BlogPost;
