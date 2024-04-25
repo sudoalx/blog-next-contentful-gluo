@@ -40,7 +40,7 @@ export const Card = async ({
 
   return (
     <div className="p-4 border rounded-md border-gray-200 ">
-      <Link href={`/${slug}`}>
+      <Link href={`/posts/${slug}`}>
         <ContentfulImage
           src={image.src}
           alt={image.alt}
