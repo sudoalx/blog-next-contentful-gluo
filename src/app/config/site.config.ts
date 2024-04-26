@@ -13,6 +13,11 @@ export const siteConfig = {
   // The URL of the site
   url: "https://blog-next-contentful-gluo.vercel.app/",
 
+  navigation: {
+    // Show the language switch
+    showLanguageSwitch: false,
+  },
+
   // Post page settings
   post: {
     // Show the author profile picture
