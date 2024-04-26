@@ -10,6 +10,7 @@ type BlogPostEntry = Entry<TypePostSkeleton, undefined, string>;
 // We don't need all the data that Contentful gives us.
 
 export interface BlogPost {
+  blogPostId?: string;
   title: string;
   slug: string;
   thumbnail: ContentImage | null;
@@ -34,7 +35,7 @@ export function parseContentfulBlogPost(
   // const { fields: author } = blogPostEntry.fields.author as { fields: any };
 
   return {
-    authorId: blogPostEntry.fields.author.sys.id,
+    blogPostId: blogPostEntry.sys.id,
     title: blogPostEntry.fields.title,
     slug: blogPostEntry.fields.slug,
     thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
@@ -49,6 +50,7 @@ export function parseContentfulBlogPost(
     excerpt: blogPostEntry.fields.excerpt ?? null,
     body: blogPostEntry.fields.body ?? null,
     category: blogPostEntry.fields.category,
+    authorId: blogPostEntry.fields.author.sys.id,
   };
 }
 
@@ -169,3 +171,50 @@ export async function fetchBlogPost({
 
   return parseContentfulBlogPost(blogPostsResult.items[0]);
 }
+
+export const fetchRelatedBlogPostsByCategory = async (
+  categoryId: string | null,
+  currentBlogPostId: string | null
+): Promise<any> => {
+  // If no categoryId is provided, return an empty array
+  if (!categoryId) {
+    return [];
+  }
+
+  const contentful = contentfulClient({ preview: false });
+  const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
+    content_type: "post",
+    "fields.category.sys.id": categoryId,
+    include: 5,
+    limit: 3,
+  });
+
+  let blogPosts = blogPostsResult.items;
+
+  // Filter out the current blog post if its ID is provided
+  if (currentBlogPostId) {
+    blogPosts = blogPosts.filter(
+      (blogPost) => blogPost.sys.id !== currentBlogPostId
+    );
+  }
+
+  return blogPosts.map((blogPostEntry: BlogPostEntry) => {
+    return {
+      title: blogPostEntry.fields.title || "",
+      slug: blogPostEntry.fields.slug || "",
+      thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+      featuredImage: parseContentfulContentImage(
+        blogPostEntry.fields.featuredImage
+      ),
+      metaDescription: blogPostEntry.fields.metaDescription ?? null,
+      metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+      creationDate: blogPostEntry.fields.creationDate
+        ? new Date(blogPostEntry.fields.creationDate)
+        : null,
+      excerpt: blogPostEntry.fields.excerpt ?? null,
+      body: blogPostEntry.fields.body ?? null,
+      authorId: blogPostEntry.fields.author.sys.id,
+      category: blogPostEntry.fields.category,
+    };
+  });
+};

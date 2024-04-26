@@ -117,7 +117,10 @@ export default async function BlogPage({
       {/* Disqus comments section */}
       <DisqusComments post={blogPost} />
       {/* Related Post section */}
-      <RelatedPosts />
+      <RelatedPosts
+        categoryId={blogPost.category.sys.id}
+        currentPostId={blogPost.blogPostId!}
+      />
     </>
   );
 }
