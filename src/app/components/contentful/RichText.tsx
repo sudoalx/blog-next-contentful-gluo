@@ -174,7 +174,7 @@ const options: CustomOptions = {
 
 export const RichText = ({ document, excerpt }: any) => {
   return (
-    <div className="p-6">
+    <div className="p-2">
       {siteConfig.post.showExcerptAsQuote && excerpt && (
         <blockquote>{excerpt}</blockquote>
       )}
