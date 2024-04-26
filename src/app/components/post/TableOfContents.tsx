@@ -47,7 +47,7 @@ export const TableOfContents = ({ post }: TableOfContentsProps) => {
         {/* Iterate over the headers (h2) in the post */}
         {getHeadersFromRichText(post.body!).map(({ text, href }, i: number) => (
           <li
-            key={i}
+            key={`${i}-${text}`}
             className="py-4 border-b-[1px] border-solid border-[#dddddd]"
           >
             {/* Create a link to each header */}
