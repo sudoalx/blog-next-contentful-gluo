@@ -1,5 +1,5 @@
 import { Category } from "@/contentful/lib/catogories";
-import { asm } from "../config/fonts";
+import { asm } from "@/app/config/fonts";
 import { SidebarLink } from "./SidebarLink";
 
 interface CategoriesPageProps {

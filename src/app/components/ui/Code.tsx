@@ -5,7 +5,7 @@ import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { HiClipboardDocument } from "react-icons/hi2";
 
-export function CodeBlock({
+export const CodeBlock = ({
   id,
   language,
   snippet,
@@ -13,7 +13,7 @@ export function CodeBlock({
   id: string;
   language?: string;
   snippet?: string;
-}) {
+}) => {
   const [status, setStatus] = useState<"idle" | "copied">("idle");
 
   if (!language || !snippet) {
@@ -55,4 +55,4 @@ export function CodeBlock({
       </div>
     </div>
   );
-}
+};

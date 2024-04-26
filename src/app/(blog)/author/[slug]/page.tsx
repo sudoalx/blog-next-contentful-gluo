@@ -1,5 +1,4 @@
-import { RichText } from "@/app/components/contentful/RichText";
-import { Grid } from "@/app/components/layout/PostsGrid";
+import { RichText, Grid } from "@/app/components";
 import {
   fetchAuthorProfile,
   fetchAuthorProfiles,

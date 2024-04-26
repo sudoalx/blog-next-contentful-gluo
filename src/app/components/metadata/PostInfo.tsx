@@ -2,7 +2,7 @@ import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import Link from "next/link";
-import ContentfulImage from "../ui/ContentfulImage";
+import { ContentfulImage } from "../ui/";
 import { siteConfig } from "@/app/config";
 
 interface PostInfoProps {

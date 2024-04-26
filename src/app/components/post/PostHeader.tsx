@@ -2,8 +2,8 @@ import { BlogPost } from "@/contentful/lib/blogPosts";
 import { PostInfo } from "../metadata/PostInfo";
 import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";
-import ContentfulImage from "../ui/ContentfulImage";
 import { siteConfig } from "@/app/config";
+import { ContentfulImage } from "../ui";
 
 interface PostHeaderProps {
   blogPost: BlogPost;

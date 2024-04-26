@@ -1,5 +1,5 @@
+import { ExitDraftModeLink } from "@/app/components";
 import { draftMode } from "next/headers";
-import ExitDraftModeLink from "@/app/components/preview-mode/ExitDraftModeLink";
 
 export default function BlogLayout({
   children,

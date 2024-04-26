@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./branding/Logo";
+import { Logo } from "../branding/Logo";
 import { BiPhoneCall } from "react-icons/bi";
 import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
 

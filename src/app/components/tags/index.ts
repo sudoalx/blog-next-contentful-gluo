@@ -1,0 +1,1 @@
+export { TagPills } from "./TagPills";

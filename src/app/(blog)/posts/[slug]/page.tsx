@@ -2,13 +2,15 @@ import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { fetchBlogPost, fetchBlogPosts } from "@/contentful/lib/blogPosts";
-import { RichText } from "@/app/components/contentful/RichText";
-import { RelatedPosts } from "@/app/components/post/RelatedPosts";
-import { PostHeader } from "@/app/components/post/PostHeader";
-import { DisqusComments } from "@/app/components/post/DisqusComments";
+import {
+  RelatedPosts,
+  PostHeader,
+  DisqusComments,
+  RichText,
+  TableOfContents,
+} from "@/app/components";
 import Link from "next/link";
 import { asm } from "@/app/config/fonts";
-import { TableOfContents } from "@/app/components/post/TableOfContent";
 import { siteConfig } from "@/app/config";
 
 interface BlogPostPageParams {

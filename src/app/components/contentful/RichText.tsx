@@ -5,12 +5,12 @@ import {
   documentToReactComponents,
 } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
-import ContentfulImage from "../ui/ContentfulImage";
+import { ContentfulImage } from "../ui/";
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/app/config";
 import slugify from "slugify";
-import { getPlainTextFromHeader } from "../post/TableOfContent";
+import { getPlainTextFromHeader } from "../post/TableOfContents";
 
 // Define custom options type
 type CustomOptions = Omit<Options, "renderMark" | "renderNode"> & {

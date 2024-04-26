@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
 import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
-import ContentfulImage from "../ui/ContentfulImage";
 import { formatDate } from "@/lib/utils";
 import { siteConfig } from "@/app/config";
+import { ContentfulImage } from "../ui";
 
 interface CardProps {
   title: string;

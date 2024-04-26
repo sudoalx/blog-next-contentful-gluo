@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Logo } from "./branding/Logo";
-import { asm } from "../config/fonts";
+import { Logo } from "../branding/Logo";
 import { GrLanguage } from "react-icons/gr";
+import { asm } from "@/app/config/fonts";
 
 export const Navbar = () => {
   return (

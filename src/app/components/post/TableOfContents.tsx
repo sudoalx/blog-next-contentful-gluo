@@ -1,7 +1,6 @@
 import { BlogPost } from "@/contentful/lib/blogPosts";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import Link from "next/link";
-import { BiArrowToRight } from "react-icons/bi";
 import { FaCaretRight } from "react-icons/fa6";
 import slugify from "slugify";
 

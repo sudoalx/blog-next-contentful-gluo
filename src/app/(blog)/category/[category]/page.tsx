@@ -1,5 +1,4 @@
-import { Sidebar } from "@/app/components";
-import { Grid } from "@/app/components/layout/PostsGrid";
+import { Sidebar, Grid } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPostsByCategory } from "@/contentful/lib/blogPosts";
 import { fetchAllCategories } from "@/contentful/lib/catogories";

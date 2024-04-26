@@ -2,9 +2,9 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 
-function ExitDraftModeLink(
+export const ExitDraftModeLink = (
   props: Readonly<React.HTMLProps<HTMLAnchorElement>>
-) {
+) => {
   const pathname = usePathname();
 
   return (
@@ -12,6 +12,4 @@ function ExitDraftModeLink(
       Exit
     </a>
   );
-}
-
-export default ExitDraftModeLink;
+};
