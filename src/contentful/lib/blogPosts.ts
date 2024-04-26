@@ -182,23 +182,16 @@ export const fetchRelatedBlogPostsByCategory = async (
   }
 
   const contentful = contentfulClient({ preview: false });
+
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
+    "sys.id[ne]": currentBlogPostId ?? "",
     "fields.category.sys.id": categoryId,
     include: 5,
     limit: 3,
   });
 
-  let blogPosts = blogPostsResult.items;
-
-  // Filter out the current blog post if its ID is provided
-  if (currentBlogPostId) {
-    blogPosts = blogPosts.filter(
-      (blogPost) => blogPost.sys.id !== currentBlogPostId
-    );
-  }
-
-  return blogPosts.map((blogPostEntry: BlogPostEntry) => {
+  return blogPostsResult.items.map((blogPostEntry: BlogPostEntry) => {
     return {
       title: blogPostEntry.fields.title || "",
       slug: blogPostEntry.fields.slug || "",
