@@ -1,8 +1,10 @@
 import { RichText } from "@/app/components/contentful/RichText";
+import { Grid } from "@/app/components/layout/PostsGrid";
 import {
   fetchAuthorProfile,
   fetchAuthorProfiles,
 } from "@/contentful/lib/authorProfile";
+import { fetchBlogPostsByAuthor } from "@/contentful/lib/blogPosts";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -56,6 +58,7 @@ export default async function AuthorPage({
     // For example, redirect to 404 page
     return notFound();
   }
+  const authorPosts = await fetchBlogPostsByAuthor(author.authorId!);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -76,6 +79,13 @@ export default async function AuthorPage({
           <span className="text-2xl font-bold">Biography</span>
         </h2>
         <RichText document={author.biography} />
+      </div>
+      {/* Display blog posts by author */}
+      <div>
+        <h2 className="font-bold mt-8 pb-2 mb-4 border-b-4 border-[#d2fc51]">
+          Blog Posts by {author.fullName}
+        </h2>
+        <Grid blogPosts={authorPosts} />
       </div>
     </div>
   );

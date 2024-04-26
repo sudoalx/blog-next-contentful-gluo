@@ -8,6 +8,7 @@ type AuthorEntry = Entry<TypeAuthorSkeleton, undefined, string>;
 
 // AuthorProfile interface
 export interface AuthorProfile {
+  authorId?: string;
   photo?: ContentImage | null;
   fullName?: string;
   slug?: string;
@@ -23,6 +24,7 @@ export function parseContentfulAuthorProfile(
     return null;
   }
   return {
+    authorId: author.sys.id,
     photo: parseContentfulContentImage(author.fields.photo),
     fullName: author.fields.fullName,
     slug: author.fields.slug,

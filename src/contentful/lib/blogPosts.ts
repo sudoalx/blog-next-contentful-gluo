@@ -32,7 +32,6 @@ export function parseContentfulBlogPost(
   if (!blogPostEntry) {
     return null;
   }
-  // const { fields: author } = blogPostEntry.fields.author as { fields: any };
 
   return {
     blogPostId: blogPostEntry.sys.id,
@@ -66,7 +65,7 @@ export async function fetchBlogPosts({
 
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
-    include: 5,
+    include: 3,
     order: ["-fields.creationDate"],
   });
 
@@ -94,7 +93,37 @@ export async function fetchBlogPosts({
 }
 
 // A function to fetch blogposts by authorId
-const fetchBlogPostsByAuthor = () => {};
+export const fetchBlogPostsByAuthor = async (
+  authorId: string
+): Promise<BlogPost[]> => {
+  const contentful = contentfulClient({ preview: false });
+  const blogPostsResult = contentful.getEntries<TypePostSkeleton>({
+    content_type: "post",
+    "fields.author.sys.id": authorId,
+    include: 3,
+  });
+  // Map blog post entries to BlogPost objects including author information
+  return (await blogPostsResult).items.map((blogPostEntry) => {
+    // const { fields: author } = blogPostEntry.fields.author as { fields: any };
+    return {
+      title: blogPostEntry.fields.title || "",
+      slug: blogPostEntry.fields.slug || "",
+      thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+      featuredImage: parseContentfulContentImage(
+        blogPostEntry.fields.featuredImage
+      ),
+      metaDescription: blogPostEntry.fields.metaDescription ?? null,
+      metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+      creationDate: blogPostEntry.fields.creationDate
+        ? new Date(blogPostEntry.fields.creationDate)
+        : null,
+      excerpt: blogPostEntry.fields.excerpt ?? null,
+      body: blogPostEntry.fields.body ?? null,
+      authorId: blogPostEntry.fields.author.sys.id,
+      category: blogPostEntry.fields.category,
+    };
+  });
+};
 
 // A function to fetch blogposts by category
 export const fetchBlogPostsByCategory = async (
@@ -109,7 +138,7 @@ export const fetchBlogPostsByCategory = async (
   const blogPostsResult = contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
     "fields.category.sys.id": categoryId,
-    include: 5,
+    include: 3,
   });
   return (await blogPostsResult).items.map(
     (blogPostEntry: {
@@ -166,46 +195,43 @@ export async function fetchBlogPost({
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
     "fields.slug": slug,
-    include: 5,
+    include: 3,
   });
 
   return parseContentfulBlogPost(blogPostsResult.items[0]);
 }
 
 export const fetchRelatedBlogPostsByCategory = async (
-  categoryId: string | null,
-  currentBlogPostId: string | null
+  categoryId: string,
+  currentBlogPostId: string
 ): Promise<any> => {
-  // If no categoryId is provided, return an empty array
-  if (!categoryId) {
-    return [];
-  }
-
   const contentful = contentfulClient({ preview: false });
 
   const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
     content_type: "post",
-    "sys.id[ne]": currentBlogPostId ?? "",
+    // Exclude the current blog post (https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/search-parameters/inequality-operator)
+    "sys.id[ne]": currentBlogPostId,
+    // Filter by category ID
     "fields.category.sys.id": categoryId,
-    include: 5,
+    include: 3,
     limit: 3,
   });
 
   return blogPostsResult.items.map((blogPostEntry: BlogPostEntry) => {
     return {
-      title: blogPostEntry.fields.title || "",
-      slug: blogPostEntry.fields.slug || "",
+      title: blogPostEntry.fields.title,
+      slug: blogPostEntry.fields.slug,
       thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
       featuredImage: parseContentfulContentImage(
         blogPostEntry.fields.featuredImage
       ),
-      metaDescription: blogPostEntry.fields.metaDescription ?? null,
-      metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+      metaDescription: blogPostEntry.fields.metaDescription,
+      metaKeywords: blogPostEntry.fields.metaKeywords,
       creationDate: blogPostEntry.fields.creationDate
         ? new Date(blogPostEntry.fields.creationDate)
         : null,
-      excerpt: blogPostEntry.fields.excerpt ?? null,
-      body: blogPostEntry.fields.body ?? null,
+      excerpt: blogPostEntry.fields.excerpt,
+      body: blogPostEntry.fields.body,
       authorId: blogPostEntry.fields.author.sys.id,
       category: blogPostEntry.fields.category,
     };
