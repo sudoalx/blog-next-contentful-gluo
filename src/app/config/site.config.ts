@@ -18,6 +18,11 @@ export const siteConfig = {
     showLanguageSwitch: false,
   },
 
+  // Posts grid settings
+  postsGrid: {
+    distribution: "columns", // rows or columns
+  },
+
   // Post page settings
   post: {
     // Show the author profile picture

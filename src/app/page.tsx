@@ -4,6 +4,7 @@ import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPosts } from "@/contentful/lib/blogPosts";
 import { draftMode } from "next/headers";
 import { fetchAllCategories } from "@/contentful/lib/catogories";
+import { siteConfig } from "./config";
 
 interface CategoriesPageProps {
   params: {
@@ -23,7 +24,14 @@ export default async function Home({ params }: Readonly<CategoriesPageProps>) {
       >
         Blog
       </h1>
-      <div className="p-4 flex flex-col-reverse lg:flex gap-2 lg:flex-row">
+      {/* Blog homepage content */}
+      <div
+        className={`p-4 flex flex-col-reverse lg:flex ${
+          siteConfig.postsGrid.distribution == "columns"
+            ? "lg:flex-row"
+            : "lg:flex-col-reverse"
+        } gap-2`}
+      >
         {/* Grid of articles */}
         <Grid blogPosts={blogPosts} />
         {/* Sidebar */}

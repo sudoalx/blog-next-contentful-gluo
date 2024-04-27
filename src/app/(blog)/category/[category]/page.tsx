@@ -1,4 +1,5 @@
 import { Sidebar, Grid } from "@/app/components";
+import { siteConfig } from "@/app/config";
 import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPostsByCategory } from "@/contentful/lib/blogPosts";
 import { fetchAllCategories } from "@/contentful/lib/catogories";
@@ -54,7 +55,7 @@ export default async function CategoriesPage({
 
   return (
     <main className="container mx-auto mb-10">
-      {/* Blog category title */}
+      {/* Blog category breadcrumb */}
       <div
         className={`${einaLight.className} flex flex-wrap items-end gap-4 my-10 px-4 text-4xl`}
       >
@@ -68,7 +69,14 @@ export default async function CategoriesPage({
         <SlArrowRight className="inline text-3xl" />
         <span className="capitalize">{decodedCategory}</span>
       </div>
-      <div className="p-4 flex flex-col-reverse lg:flex lg:flex-row gap-2">
+      {/* Blog categories content */}
+      <div
+        className={`p-4 flex flex-col-reverse lg:flex ${
+          siteConfig.postsGrid.distribution == "columns"
+            ? "lg:flex-row"
+            : "lg:flex-col-reverse"
+        } gap-2`}
+      >
         {/* Grid of articles */}
         <Grid blogPosts={blogPosts} />
         {/* Sidebar */}
