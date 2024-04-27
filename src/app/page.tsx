@@ -19,7 +19,7 @@ export default async function Home({ params }: Readonly<CategoriesPageProps>) {
       {/* Blog homepage */}
       {/* Blog homepage heading */}
       <h1
-        className={`text-5xl mb-10 mt-20 mx-4 eina-light ${einaLight.className}`}
+        className={`text-5xl mb-10 mt-20 mx-4 eina-light ${einaLight.className} font-normal`}
       >
         Blog
       </h1>
