@@ -8,6 +8,7 @@ import {
   DisqusComments,
   RichText,
   TableOfContents,
+  ScrollUpButton,
 } from "@/app/components";
 import Link from "next/link";
 import { asm } from "@/app/config/fonts";
@@ -107,11 +108,16 @@ export default async function BlogPage({
           } `}
         >
           {/* Post body */}
-          <div className="w-full md:w-3/4 lg:w-3/4 mx-auto">
+          <div className="w-full md:w-5/8 lg:w-3/4 mx-auto">
             <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
           </div>
+          {/* Scroll to top button */}
+          <div className="w-12">
+            <ScrollUpButton />
+          </div>
+
           {/* Table of contents */}
-          <div className="w-full p-6 md:w-1/4 lg:w-1/4 mx-auto md:sticky md:top-10 md:h-full">
+          <div className="md:w-2/8 lg:w-2/8 mx-auto md:sticky md:top-10 md:h-full">
             <TableOfContents post={blogPost} />
           </div>
         </div>
