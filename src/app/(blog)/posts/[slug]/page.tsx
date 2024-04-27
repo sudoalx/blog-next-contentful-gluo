@@ -103,21 +103,21 @@ export default async function BlogPage({
         <PostHeader blogPost={blogPost} />
 
         <div
-          className={`text-lg mt-9 flex flex-wrap flex-col-reverse justify-between md:flex-row${
+          className={`text-lg mt-9 flex flex-wrap flex-col-reverse md:flex-col-reverse justify-between lg:flex-row${
             siteConfig.post.positionTableOfContents == "right" ? "" : "-reverse"
           } `}
         >
           {/* Post body */}
-          <div className="w-full md:w-5/8 lg:w-3/4 mx-auto">
+          <div className="w-full md:w-4/8 lg:w-3/4 mx-auto">
             <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
           </div>
           {/* Scroll to top button */}
-          <div className="w-12">
+          <div className="w-1/8">
             <ScrollUpButton />
           </div>
 
           {/* Table of contents */}
-          <div className="md:w-2/8 lg:w-2/8 mx-auto md:sticky md:top-10 md:h-full">
+          <div className="md:w-3/8 lg:w-2/8 mx-auto lg:sticky md:top-10 md:h-full">
             <TableOfContents post={blogPost} />
           </div>
         </div>

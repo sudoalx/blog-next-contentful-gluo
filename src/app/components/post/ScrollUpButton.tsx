@@ -23,7 +23,7 @@ export const ScrollUpButton = () => {
 
   return (
     <button
-      className={`sticky bg-[#d2fc51] text-black text-lg font-bold p-4 top-[92%] flex justify-center items-center rounded-full w-12 h-12 right-4 z-50 ${
+      className={`fixed md:fixed lg:fixed xl:sticky bg-[#d2fc51] text-black text-lg font-bold p-4 top-[92%] flex justify-center items-center rounded-full w-12 h-12 right-4 z-50 ${
         ShowButton ? "" : "hidden transition-all animate-pulse"
       }`}
       onClick={scrollUp}
