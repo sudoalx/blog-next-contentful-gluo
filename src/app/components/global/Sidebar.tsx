@@ -1,4 +1,4 @@
-import { Category } from "@/contentful/lib/catogories";
+import { Category } from "@/contentful/lib/";
 import { asm } from "@/app/config/fonts";
 import { SidebarLink } from "./SidebarLink";
 import { siteConfig } from "@/app/config";

@@ -2,8 +2,8 @@ import { RichText, Grid } from "@/app/components";
 import {
   fetchAuthorProfile,
   fetchAuthorProfiles,
-} from "@/contentful/lib/authorProfile";
-import { fetchBlogPostsByAuthor } from "@/contentful/lib/blogPosts";
+  fetchBlogPostsByAuthor,
+} from "@/contentful/lib/";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";

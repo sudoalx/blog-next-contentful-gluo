@@ -1,4 +1,4 @@
-import { BlogPost } from "@/contentful/lib/blogPosts";
+import { BlogPost } from "@/contentful/lib/";
 import { Card } from "../posts/PostCard";
 
 interface GridProps {

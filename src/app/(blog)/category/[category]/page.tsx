@@ -1,8 +1,10 @@
 import { Sidebar, Grid } from "@/app/components";
 import { siteConfig } from "@/app/config";
 import { einaLight } from "@/app/config/fonts";
-import { fetchBlogPostsByCategory } from "@/contentful/lib/blogPosts";
-import { fetchAllCategories } from "@/contentful/lib/catogories";
+import {
+  fetchBlogPostsByCategory,
+  fetchAllCategories,
+} from "@/contentful/lib/";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SlArrowRight } from "react-icons/sl";

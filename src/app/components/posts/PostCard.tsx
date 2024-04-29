@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { readingTimeEstimator } from "@/lib/utils/reading-time";
-import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
+import {
+  fetchAuthorProfileById,
+  ContentImage,
+  AuthorProfile,
+} from "@/contentful/lib/";
 import { formatDate } from "@/lib/utils";
 import { siteConfig } from "@/app/config";
 import { ContentfulImage } from "../ui";
-import { AuthorProfile } from "../../../contentful/lib/authorProfile";
-import { ContentImage } from "@/contentful/lib/contentImage";
 
 interface CardProps {
   title: string;

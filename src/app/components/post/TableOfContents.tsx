@@ -1,4 +1,4 @@
-import { BlogPost } from "@/contentful/lib/blogPosts";
+import { BlogPost } from "@/contentful/lib/";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import Link from "next/link";
 import { FaCaretRight } from "react-icons/fa6";

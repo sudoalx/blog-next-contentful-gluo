@@ -1,8 +1,5 @@
 import { Card } from "../posts/PostCard";
-import {
-  BlogPost,
-  fetchRelatedBlogPostsByCategory,
-} from "@/contentful/lib/blogPosts";
+import { BlogPost, fetchRelatedBlogPostsByCategory } from "@/contentful/lib/";
 
 interface RelatedPostsProps {
   categoryId: string;

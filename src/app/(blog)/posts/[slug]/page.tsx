@@ -1,14 +1,13 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { fetchBlogPost, fetchBlogPosts } from "@/contentful/lib/blogPosts";
+import { fetchBlogPost, fetchBlogPosts } from "@/contentful/lib/";
 import {
   RelatedPosts,
   PostHeader,
   DisqusComments,
   RichText,
   TableOfContents,
-  ScrollUpButton,
 } from "@/app/components";
 import Link from "next/link";
 import { asm } from "@/app/config/fonts";

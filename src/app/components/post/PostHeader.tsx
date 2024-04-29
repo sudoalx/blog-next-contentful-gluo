@@ -1,4 +1,4 @@
-import { BlogPost } from "@/contentful/lib/blogPosts";
+import { BlogPost } from "@/contentful/lib/";
 import { PostInfo } from "../metadata/PostInfo";
 import { ShareButtons } from "../metadata/ShareButtons";
 import { TagPills } from "../tags/TagPills";

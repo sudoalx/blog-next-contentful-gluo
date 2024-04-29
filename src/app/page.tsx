@@ -1,9 +1,8 @@
 import { Grid } from "@/app/components/layout/PostsGrid";
 import { Sidebar } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
-import { fetchBlogPosts } from "@/contentful/lib/blogPosts";
+import { fetchBlogPosts, fetchAllCategories } from "@/contentful/lib/";
 import { draftMode } from "next/headers";
-import { fetchAllCategories } from "@/contentful/lib/catogories";
 import { siteConfig } from "./config";
 
 interface CategoriesPageProps {
