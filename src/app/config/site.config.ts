@@ -23,7 +23,7 @@ export const siteConfig = {
     sidebar: {
       distribution: "side", // top or side
     },
-    numberOfColumns: 3,
+    // numberOfColumns: 3,
   },
 
   // Post card settings
@@ -37,7 +37,7 @@ export const siteConfig = {
     // Show the excerpt
     showExcerpt: true,
     // Design of the card
-    design: "squared", // rounded or squared
+    design: "squared", // rounded, rounded2, squared, squared2
   },
 
   // Post page settings
