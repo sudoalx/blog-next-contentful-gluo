@@ -36,7 +36,7 @@ interface TableOfContentsProps {
 
 export const TableOfContents = ({ post }: TableOfContentsProps) => {
   return (
-    <div className="w-full font-extralight text-base">
+    <div className="font-extralight text-base">
       <div className="flex gap-2 items-center">
         <span>
           <FaCaretRight className="inline-block text-[#d2fc51] text-2xl -ml-2" />
@@ -44,12 +44,12 @@ export const TableOfContents = ({ post }: TableOfContentsProps) => {
         <h4 className="m-0 font-light text-lg">Content</h4>
       </div>
       {/* For displays smaller than md then make collapsable <ol> */}
-      <ol className="flex flex-col w-full lg:block list-none pl-0 mt-4 mb-0">
+      <ol className="flex flex-col lg:block list-none pl-0 mt-4 mb-0">
         {/* Iterate over the headers (h2) in the post */}
         {getHeadersFromRichText(post.body!).map(({ text, href }, i: number) => (
           <li
             key={`${i}-${text}`}
-            className="py-4 w-full border-b-[1px] border-solid border-[#dddddd] flex flex-wrap text-wrap"
+            className="py-4 border-b-[1px] border-solid border-[#dddddd] flex flex-wrap text-wrap"
           >
             {/* Create a link to each header */}
             <Link href={href}>{text}</Link>

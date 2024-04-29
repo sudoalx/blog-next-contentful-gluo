@@ -103,25 +103,36 @@ export default async function BlogPage({
         <PostHeader blogPost={blogPost} />
 
         <div
-          className={`text-lg mt-9 flex flex-wrap flex-col-reverse md:flex-col-reverse justify-between lg:flex-row${
-            siteConfig.post.positionTableOfContents == "right" ? "" : "-reverse"
-          } `}
+          className={`text-lg mt-9 flex flex-wrap justify-between lg:flex-row ${
+            siteConfig.post.positionTableOfContents === "left"
+              ? "lg:flex-row-reverse"
+              : ""
+          }`}
         >
-          {/* Post body */}
-          <div className="w-full md:w-4/8 lg:w-3/4 mx-auto">
-            <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
-          </div>
-          {/* Scroll to top button */}
-          <div className="w-1/8">
-            <ScrollUpButton />
+          {/* Table of contents */}
+          <div
+            className={`w-full h-full sticky md:top-10 md:w-3/12 mx-auto ${
+              siteConfig.post.positionTableOfContents === "left"
+                ? "lg:order-last"
+                : "md:order-last"
+            }`}
+          >
+            <TableOfContents post={blogPost} />
           </div>
 
-          {/* Table of contents */}
-          <div className="md:w-3/8 lg:w-2/8 mx-auto lg:sticky md:top-10 md:h-full">
-            <TableOfContents post={blogPost} />
+          {/* Post body */}
+          <div
+            className={`w-full md:w-8/12 mx-auto ${
+              siteConfig.post.positionTableOfContents === "left"
+                ? "lg:order-first"
+                : "md:order-first"
+            }`}
+          >
+            <RichText document={blogPost.body} excerpt={blogPost.excerpt} />
           </div>
         </div>
       </article>
+
       {/* Disqus comments section */}
       <DisqusComments post={blogPost} />
       {/* Related Post section */}
