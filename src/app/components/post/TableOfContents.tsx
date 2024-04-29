@@ -36,7 +36,7 @@ interface TableOfContentsProps {
 
 export const TableOfContents = ({ post }: TableOfContentsProps) => {
   return (
-    <div className="font-extralight text-base">
+    <div className="font-extralight text-base p-2">
       <div className="flex gap-2 items-center">
         <span>
           <FaCaretRight className="inline-block text-[#d2fc51] text-2xl -ml-2" />
