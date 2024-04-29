@@ -20,7 +20,20 @@ export const siteConfig = {
 
   // Posts grid settings
   postsGrid: {
-    distribution: "columns", // rows or columns
+    distribution: "rows", // rows or columns
+    numberOfColumns: 3,
+  },
+
+  // Post card settings
+  postCard: {
+    // Show the author profile picture
+    showAuthorProfilePicture: true,
+    // Show the reading time
+    showReadingTime: true,
+    // Show the date
+    showDate: true,
+    // Show the excerpt
+    showExcerpt: true,
   },
 
   // Post page settings
@@ -42,9 +55,5 @@ export const siteConfig = {
     showExcerptAsQuote: false,
     // Show the table of contents to the left or right of the post
     positionTableOfContents: "right", // left or right
-  },
-
-  author: {
-    showProfilePicture: true,
   },
 };

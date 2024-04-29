@@ -1,5 +1,6 @@
 import { BlogPost } from "@/contentful/lib/blogPosts";
 import { Card } from "../posts/PostCard";
+import { siteConfig } from "@/app/config";
 
 interface GridProps {
   blogPosts: BlogPost[];
@@ -8,8 +9,10 @@ interface GridProps {
 export const Grid = async ({ blogPosts }: GridProps) => {
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {blogPosts.map((post) => (
+      <div
+        className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-${siteConfig.postsGrid.numberOfColumns}`}
+      >
+        {blogPosts.map((post: BlogPost) => (
           <Card
             key={post.title}
             title={post.title}

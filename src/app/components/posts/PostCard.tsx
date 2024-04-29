@@ -5,20 +5,27 @@ import { fetchAuthorProfileById } from "@/contentful/lib/authorProfile";
 import { formatDate } from "@/lib/utils";
 import { siteConfig } from "@/app/config";
 import { ContentfulImage } from "../ui";
+import { AuthorProfile } from "../../../contentful/lib/authorProfile";
+import { ContentImage } from "@/contentful/lib/contentImage";
 
 interface CardProps {
   title: string;
   date: string;
   body: RichTextDocument;
   slug: string;
-  image: {
-    src: string;
-    alt: string;
-    height: number;
-    width: number;
-  };
+  image: ContentImage;
   authorId: string;
-  excerpt?: any;
+  excerpt: any;
+}
+
+interface CardDesignProps {
+  title: string;
+  date: string;
+  slug: string;
+  image: ContentImage;
+  excerpt: string;
+  author: AuthorProfile;
+  readingTime: string;
 }
 
 export const Card = async ({
@@ -27,37 +34,111 @@ export const Card = async ({
   body,
   slug,
   authorId,
-  image = {
-    src: "https://via.placeholder.com/850x500",
-    alt: "Placeholder image",
-    height: 500,
-    width: 850,
-  },
+  image,
   excerpt,
 }: CardProps) => {
   const readingTime = await readingTimeEstimator(body);
   const author = await fetchAuthorProfileById(authorId);
 
+  const cardProps: CardDesignProps = {
+    title,
+    date,
+    slug,
+    image,
+    excerpt,
+    author,
+    readingTime,
+  };
+
+  return <CardDesignNoSpace {...cardProps} />;
+};
+
+const CardDesignSpaced = ({
+  title,
+  date,
+  slug,
+  image,
+  excerpt,
+  author,
+  readingTime,
+}: CardDesignProps) => {
   return (
-    <div className="p-4 border rounded-md border-gray-200 ">
+    <div className="p-4 border rounded-md border-gray-200">
       <Link href={`/posts/${slug}`}>
+        {/* Show image */}
         <ContentfulImage
           src={image.src}
           alt={image.alt}
           height={image.height}
           width={image.width}
-          // set height and width to maintain aspect ratio
-          className="rounded-lg mb-4 w-full h-40 object-cover"
+          className="rounded-lg mb-4 w-full object-cover h-1/2 hover:opacity-80 transition-opacity"
         />
-        <h2 className="text-xl font-semibold">{title}</h2>
-        <p className="text-gray-600 mt-2 text-sm">{excerpt}</p>
+        {/* Show title */}
+        <h2 className="text-xl font-normal mt-0 mb-1 hover:text-[#0d6efd]">
+          {title}
+        </h2>
+        {/* Show excerpt if enabled */}
+        {siteConfig.postCard.showExcerpt && (
+          <p className="text-gray-600 mt-2 text-sm">{excerpt}</p>
+        )}
       </Link>
 
-      <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
+      <div className="flex justify-between items-center mt-4 mb-4 text-sm text-gray-500">
         <p className="text-sm text-gray-500">{formatDate(date)}</p>
         <div className="flex items-center">
           <Link href={`/author/${author.slug}`} className="flex items-center">
-            {siteConfig.author.showProfilePicture && (
+            {/* Show author profile picture if enabled */}
+            {siteConfig.postCard.showAuthorProfilePicture && (
+              <ContentfulImage
+                {...author.photo!}
+                className="rounded-full h-6 w-6 mr-2"
+              />
+            )}
+            <p className="mr-2">{author?.fullName}</p>
+          </Link>
+        </div>
+        <p className="text-sm text-gray-500">{readingTime}</p>
+      </div>
+    </div>
+  );
+};
+
+const CardDesignNoSpace = ({
+  title,
+  date,
+  slug,
+  image,
+  excerpt,
+  author,
+  readingTime,
+}: CardDesignProps) => {
+  return (
+    <div className="p-2">
+      <Link href={`/posts/${slug}`}>
+        {/* Show image */}
+        <ContentfulImage
+          src={image.src}
+          alt={image.alt}
+          height={image.height}
+          width={image.width}
+          className="w-full object-cover h-1/2 hover:opacity-80 transition-opacity"
+        />
+        {/* Show title */}
+        <h2 className="text-xl font-normal mt-0 mb-1 hover:text-[#0d6efd]">
+          {title}
+        </h2>
+        {/* Show excerpt if enabled */}
+        {siteConfig.postCard.showExcerpt && (
+          <p className="text-gray-600 mt-2 text-sm">{excerpt}</p>
+        )}
+      </Link>
+
+      <div className="flex justify-between items-center mt-4 mb-4 text-sm text-gray-500">
+        <p className="text-sm text-gray-500">{formatDate(date)}</p>
+        <div className="flex items-center">
+          <Link href={`/author/${author.slug}`} className="flex items-center">
+            {/* Show author profile picture if enabled */}
+            {siteConfig.postCard.showAuthorProfilePicture && (
               <ContentfulImage
                 {...author.photo!}
                 className="rounded-full h-6 w-6 mr-2"
