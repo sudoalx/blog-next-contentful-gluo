@@ -1,18 +1,20 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GoArrowUp } from "react-icons/go";
 
 export const ScrollUpButton = () => {
   const [ShowButton, setShowButton] = useState(false);
   // get the scroll position
-  window.addEventListener("scroll", () => {
-    //   hide the button if the scroll position is less than 100
-    if (window.scrollY < 250) {
-      setShowButton(false);
-    } else {
-      setShowButton(true);
-    }
-  });
+  React.Component.prototype.componentDidMount = () => {
+    window.addEventListener("scroll", () => {
+      //   hide the button if the scroll position is less than 100
+      if (window.scrollY < 250) {
+        setShowButton(false);
+      } else {
+        setShowButton(true);
+      }
+    });
+  };
 
   const scrollUp = () => {
     window.scrollTo({
