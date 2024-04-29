@@ -7,10 +7,9 @@ interface GridProps {
 }
 
 export const Grid = async ({ blogPosts }: GridProps) => {
-  const gridSize = `lg:grid-cols-${siteConfig.postsGrid.numberOfColumns}`;
   return (
     <div className="w-full">
-      <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${gridSize}`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 grid-flow-row-dense w-full">
         {blogPosts.map((post: BlogPost) => (
           <Card
             key={post.title}
