@@ -1,6 +1,5 @@
 import { BlogPost } from "@/contentful/lib/blogPosts";
 import { Card } from "../posts/PostCard";
-import { siteConfig } from "@/app/config";
 
 interface GridProps {
   blogPosts: BlogPost[];

@@ -36,6 +36,8 @@ export const siteConfig = {
     showDate: true,
     // Show the excerpt
     showExcerpt: true,
+    // Design of the card
+    design: "squared", // rounded or squared
   },
 
   // Post page settings

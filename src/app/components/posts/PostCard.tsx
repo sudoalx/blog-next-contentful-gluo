@@ -50,10 +50,14 @@ export const Card = async ({
     readingTime,
   };
 
-  return <CardDesignNoSpace {...cardProps} />;
+  return siteConfig.postCard.design === "rounded" ? (
+    <CardDesignRounded {...cardProps} />
+  ) : (
+    <CardDesignSquared {...cardProps} />
+  );
 };
 
-const CardDesignSpaced = ({
+const CardDesignRounded = ({
   title,
   date,
   slug,
@@ -103,7 +107,7 @@ const CardDesignSpaced = ({
   );
 };
 
-const CardDesignNoSpace = ({
+const CardDesignSquared = ({
   title,
   date,
   slug,
