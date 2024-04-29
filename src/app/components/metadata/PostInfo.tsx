@@ -30,7 +30,7 @@ export const PostInfo = async ({
           href={`/author/${author.slug}`}
           className="flex items-center text-xs text-gray-500"
         >
-          {siteConfig.author.showProfilePicture && (
+          {siteConfig.post.showAuthorProfilePicture && (
             <ContentfulImage
               {...author.photo!}
               className="rounded-full h-6 w-6 mr-2"
