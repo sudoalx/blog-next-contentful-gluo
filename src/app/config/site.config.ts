@@ -20,7 +20,9 @@ export const siteConfig = {
 
   // Posts grid settings
   postsGrid: {
-    distribution: "rows", // rows or columns
+    sidebar: {
+      distribution: "side", // top or side
+    },
     numberOfColumns: 3,
   },
 

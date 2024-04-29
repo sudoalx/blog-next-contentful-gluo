@@ -19,12 +19,12 @@ export const Sidebar = async ({
   return (
     <div
       className={`md:px-4 py-2 border-gray-200 rounded-lg ${
-        siteConfig.postsGrid.distribution === "columns"
+        siteConfig.postsGrid.sidebar.distribution === "side"
           ? "w-full lg:w-1/6"
           : "w-full"
       }`}
     >
-      {siteConfig.postsGrid.distribution === "columns" && (
+      {siteConfig.postsGrid.sidebar.distribution === "side" && (
         <h2
           className={`text-xl font-semibold hidden lg:block ${asm.className}`}
         >
@@ -33,14 +33,14 @@ export const Sidebar = async ({
       )}
       <div
         className={`${
-          siteConfig.postsGrid.distribution === "columns"
+          siteConfig.postsGrid.sidebar.distribution === "side"
             ? "capitalize h-full mt-2 lg:block flex-wrap whitespace-nowrap lg:whitespace-normal"
             : "capitalize whitespace-nowrap"
         }`}
       >
         <ul
           className={`h-full w-full flex gap-10 md:overflow-x-auto ${
-            siteConfig.postsGrid.distribution === "columns"
+            siteConfig.postsGrid.sidebar.distribution === "side"
               ? "lg:flex lg:flex-col lg:gap-2"
               : "lg:flex lg:overflow-x-auto"
           } pb-4`}

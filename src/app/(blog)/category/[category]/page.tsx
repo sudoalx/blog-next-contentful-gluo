@@ -72,7 +72,7 @@ export default async function CategoriesPage({
       {/* Blog categories content */}
       <div
         className={`p-4 flex flex-col-reverse lg:flex ${
-          siteConfig.postsGrid.distribution == "columns"
+          siteConfig.postsGrid.sidebar.distribution == "side"
             ? "lg:flex-row"
             : "lg:flex-col-reverse"
         } gap-2`}

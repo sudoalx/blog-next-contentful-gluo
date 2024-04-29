@@ -10,7 +10,9 @@ export const Grid = async ({ blogPosts }: GridProps) => {
   return (
     <div className="w-full">
       <div
-        className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-${siteConfig.postsGrid.numberOfColumns}`}
+        className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-${
+          siteConfig.postsGrid.numberOfColumns ?? 3
+        }`}
       >
         {blogPosts.map((post: BlogPost) => (
           <Card
