@@ -1,4 +1,5 @@
 import { Sidebar, Grid } from "@/app/components";
+import { CategoryBreadcrumbs } from "@/app/components/categories/CategoryBreadcrumbs";
 import { siteConfig } from "@/app/config";
 import { einaLight } from "@/app/config/fonts";
 import {
@@ -58,19 +59,7 @@ export default async function CategoriesPage({
   return (
     <main className="container mx-auto mb-10">
       {/* Blog category breadcrumb */}
-      <div
-        className={`${einaLight.className} flex flex-wrap items-end gap-4 my-10 px-4 text-4xl`}
-      >
-        <Link
-          href="/"
-          className=" hover:text-blue-600"
-          aria-label="Back to blog"
-        >
-          Blog
-        </Link>
-        <SlArrowRight className="inline text-3xl" />
-        <span className="capitalize">{decodedCategory}</span>
-      </div>
+      <CategoryBreadcrumbs decodedCategory={decodedCategory} />
       {/* Blog categories content */}
       <div
         className={`p-4 flex flex-col-reverse lg:flex ${
