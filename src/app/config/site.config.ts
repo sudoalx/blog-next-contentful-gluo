@@ -13,6 +13,9 @@ export const siteConfig = {
   // The URL of the site
   url: "https://blog-next-contentful-gluo.vercel.app/",
 
+  // The keywords of the site
+  keywords: ["software development", "technology", "programming"],
+
   navigation: {
     // Show the language switch
     showLanguageSwitch: false,

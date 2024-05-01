@@ -1,7 +1,11 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { fetchBlogPost, fetchBlogPosts } from "@/contentful/lib/";
+import {
+  fetchAuthorProfileById,
+  fetchBlogPost,
+  fetchBlogPosts,
+} from "@/contentful/lib/";
 import {
   RelatedPosts,
   PostHeader,
@@ -48,20 +52,27 @@ export async function generateMetadata(
     return notFound();
   }
 
+  const author = await fetchAuthorProfileById(blogPost.authorId!);
+
   return {
     title: blogPost.title,
     description: blogPost.metaDescription,
     keywords: blogPost.metaKeywords,
     openGraph: {
       title: blogPost.title,
-      description: blogPost.metaDescription ?? "",
+      description: blogPost.metaDescription!,
       type: "article",
       images: [
         {
-          url: blogPost.featuredImage?.src!,
+          url: `https://${blogPost.featuredImage?.src!}`,
           alt: blogPost.featuredImage?.alt,
         },
       ],
+      authors: [author.fullName!],
+      publishedTime: blogPost.creationDate?.toISOString(),
+      tags: blogPost.metaKeywords,
+      url: `${siteConfig.url}/blog/${blogPost.slug}`,
+      siteName: siteConfig.title,
     },
   };
 }

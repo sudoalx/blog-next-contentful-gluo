@@ -5,8 +5,17 @@ import { eina } from "./config/fonts";
 import { siteConfig } from "@/app/config";
 
 export const metadata: Metadata = {
-  title: siteConfig.title,
+  title: {
+    template: `%s | ${siteConfig.title}`,
+    default: siteConfig.title,
+  },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+  },
 };
 
 export default function RootLayout({
