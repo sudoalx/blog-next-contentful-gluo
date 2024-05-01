@@ -237,3 +237,48 @@ export const fetchRelatedBlogPostsByCategory = async (
     };
   });
 };
+
+// A function to fetch blog posts for pagination.
+// Optionally uses the Contentful content preview.
+interface FetchBlogPostsPaginationOptions {
+  limit: number;
+  skip: number;
+  preview: boolean;
+}
+export async function fetchBlogPostsPagination({
+  limit,
+  skip,
+  preview,
+}: FetchBlogPostsPaginationOptions): Promise<BlogPost[]> {
+  const contentful = contentfulClient({ preview });
+
+  const blogPostsResult = await contentful.getEntries<TypePostSkeleton>({
+    content_type: "post",
+    include: 3,
+    order: ["-fields.creationDate"],
+    limit,
+    skip,
+  });
+
+  // Map blog post entries to BlogPost objects including author information
+  return blogPostsResult.items.map((blogPostEntry) => {
+    // const { fields: author } = blogPostEntry.fields.author as { fields: any };
+    return {
+      title: blogPostEntry.fields.title || "",
+      slug: blogPostEntry.fields.slug || "",
+      thumbnail: parseContentfulContentImage(blogPostEntry.fields.thumbnail),
+      featuredImage: parseContentfulContentImage(
+        blogPostEntry.fields.featuredImage
+      ),
+      metaDescription: blogPostEntry.fields.metaDescription ?? null,
+      metaKeywords: blogPostEntry.fields.metaKeywords ?? null,
+      creationDate: blogPostEntry.fields.creationDate
+        ? new Date(blogPostEntry.fields.creationDate)
+        : null,
+      excerpt: blogPostEntry.fields.excerpt ?? null,
+      body: blogPostEntry.fields.body ?? null,
+      authorId: blogPostEntry.fields.author.sys.id,
+      category: blogPostEntry.fields.category,
+    };
+  });
+}

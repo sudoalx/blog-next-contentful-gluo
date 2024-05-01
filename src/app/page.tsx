@@ -1,17 +1,32 @@
 import { siteConfig } from "@/app/config";
-import { Grid, Sidebar } from "@/app/components";
+import { Grid, Sidebar, Pagination } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
-import { fetchBlogPosts } from "@/contentful/lib";
+import { fetchBlogPosts, fetchBlogPostsPagination } from "@/contentful/lib";
 import { draftMode } from "next/headers";
 
-export async function generateStaticParams() {
-  const categories = await fetchBlogPosts({ preview: false });
-
-  return categories;
+interface Params {
+  page?: number;
 }
 
-export default async function Home() {
-  const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
+interface Props {
+  searchParams: Params;
+}
+
+export default async function Home({ searchParams }: Readonly<Props>) {
+  // Get the page number from the URL query parameters
+  const currentPage = searchParams.page ? Number(searchParams.page) : 1;
+  // Fetch all blog posts
+  const allBlogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(
+    allBlogPosts.length / siteConfig.postsGrid.postsPerPage
+  );
+  // Fetch blog posts for the current page
+  const blogPosts = await fetchBlogPostsPagination({
+    preview: draftMode().isEnabled,
+    limit: siteConfig.postsGrid.postsPerPage,
+    skip: (currentPage - 1) * siteConfig.postsGrid.postsPerPage,
+  });
 
   return (
     // Blog homepage
@@ -35,6 +50,7 @@ export default async function Home() {
         {/* Sidebar */}
         <Sidebar />
       </div>
+      <Pagination totalPages={totalPages} />
     </main>
   );
 }

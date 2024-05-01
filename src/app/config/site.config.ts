@@ -23,6 +23,7 @@ export const siteConfig = {
 
   // Posts grid settings
   postsGrid: {
+    postsPerPage: 9,
     sidebar: {
       distribution: "side", // top or side
     },
