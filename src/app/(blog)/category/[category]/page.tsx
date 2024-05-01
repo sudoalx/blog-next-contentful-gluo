@@ -1,32 +1,49 @@
 import { Sidebar, Grid } from "@/app/components";
 import { CategoryBreadcrumbs } from "@/app/components/categories/CategoryBreadcrumbs";
 import { siteConfig } from "@/app/config";
-import { einaLight } from "@/app/config/fonts";
 import {
   fetchBlogPostsByCategory,
   fetchAllCategories,
 } from "@/contentful/lib/";
-import Link from "next/link";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { SlArrowRight } from "react-icons/sl";
+
+interface CategoriesPageParams {
+  category: string;
+}
 
 interface CategoriesPageProps {
-  params: {
-    category: string;
+  params: CategoriesPageParams;
+}
+
+export async function generateStaticParams(): Promise<CategoriesPageParams[]> {
+  const categories = await fetchAllCategories();
+
+  return categories.map((category) => ({ category: category.category }));
+}
+
+export async function generateMetadata({
+  params,
+}: Readonly<CategoriesPageProps>): Promise<Metadata> {
+  // Decode the category name, replace hyphens with spaces and capitalize the first letter of each word
+  const category = decodeURI(params.category)
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return {
+    title: `${category} | Blog`,
+    description: `All blog posts in the ${category} category.`,
   };
 }
 
 export default async function CategoriesPage({
   params,
 }: Readonly<CategoriesPageProps>) {
-  // Get the category from the URL
-  const { category } = params;
-
   /* 
     decodeURI is used to decode the category name and 
     replace all hyphens with spaces to properly match the category name
   */
-  const decodedCategory = decodeURI(category).replaceAll("-", " ");
+  const category = decodeURI(params.category).replaceAll("-", " ");
 
   const categories = await fetchAllCategories();
 
@@ -42,9 +59,7 @@ export default async function CategoriesPage({
   */
 
   // Find the categoryId for the current category passed in as a parameter
-  const currentCategory = categories.find(
-    (cat) => cat.category === decodedCategory
-  );
+  const currentCategory = categories.find((cat) => cat.category === category);
 
   // Fetch blog posts by categoryId
   const blogPosts = await fetchBlogPostsByCategory(
@@ -59,7 +74,7 @@ export default async function CategoriesPage({
   return (
     <main className="container mx-auto mb-10">
       {/* Blog category breadcrumb */}
-      <CategoryBreadcrumbs decodedCategory={decodedCategory} />
+      <CategoryBreadcrumbs decodedCategory={category} />
       {/* Blog categories content */}
       <div
         className={`p-4 flex flex-col-reverse lg:flex ${
