@@ -1,20 +1,23 @@
-import { Category } from "@/contentful/lib/";
+import { Category, fetchAllCategories } from "@/contentful/lib/";
 import { asm } from "@/app/config/fonts";
 import { SidebarLink } from "./SidebarLink";
 import { siteConfig } from "@/app/config";
 
 interface CategoriesPageProps {
-  categories: Category[];
-  params: {
-    category: string;
+  categories?: Category[];
+  params?: {
+    category?: string;
   };
 }
 
 export const Sidebar = async ({
-  categories = [],
+  categories,
   params,
 }: Readonly<CategoriesPageProps>) => {
-  const { category: activeCategory } = params;
+  if (!categories) {
+    categories = await fetchAllCategories();
+  }
+  const { category: activeCategory } = params ?? {};
 
   return (
     <div
@@ -46,11 +49,11 @@ export const Sidebar = async ({
           } pb-4`}
           style={{ overflowY: "hidden", boxSizing: "border-box" }}
         >
-          {categories.map(({ category }) => (
+          {categories.map(({ category }: Category) => (
             <li key={category} className="mt-2">
               <SidebarLink
                 category={category}
-                activeCategory={activeCategory}
+                activeCategory={activeCategory ?? ""}
               />
             </li>
           ))}
