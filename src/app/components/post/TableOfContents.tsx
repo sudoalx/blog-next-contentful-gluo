@@ -1,8 +1,8 @@
 import { BlogPost } from "@/contentful/lib/";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import Link from "next/link";
-import { FaCaretRight } from "react-icons/fa6";
 import slugify from "slugify";
+import { Accordion } from "./Accordion";
 
 // This is for cases where the heading might be partially underlined and have two child nodes
 // so you can't just get the text (.value) from the first one in the array
@@ -35,27 +35,20 @@ interface TableOfContentsProps {
 }
 
 export const TableOfContents = ({ post }: TableOfContentsProps) => {
+  const pstHeaders = getHeadersFromRichText(post.body!);
+
   return (
-    <div className="font-extralight text-base p-2">
-      <div className="flex gap-2 items-center">
-        <span>
-          <FaCaretRight className="inline-block text-[#d2fc51] text-2xl -ml-2" />
-        </span>
-        <h4 className="m-0 font-light text-lg">Content</h4>
-      </div>
-      {/* For displays smaller than md then make collapsable <ol> */}
-      <ol className="flex flex-col lg:block list-none pl-0 mt-4 mb-0">
-        {/* Iterate over the headers (h2) in the post */}
-        {getHeadersFromRichText(post.body!).map(({ text, href }, i: number) => (
-          <li
-            key={`${i}-${text}`}
-            className="py-4 border-b-[1px] border-solid border-[#dddddd] flex flex-wrap text-wrap"
-          >
-            {/* Create a link to each header */}
-            <Link href={href}>{text}</Link>
-          </li>
-        ))}
-      </ol>
-    </div>
+    <Accordion>
+      {/* Iterate over the headers (h2) in the post */}
+      {pstHeaders.map(({ text, href }, i: number) => (
+        <li
+          key={`${i}-${text}`}
+          className="py-4 border-b-[1px] border-solid border-[#dddddd] flex flex-wrap text-wrap"
+        >
+          {/* Use the Link component directly */}
+          <Link href={href}>{text}</Link>
+        </li>
+      ))}
+    </Accordion>
   );
 };
