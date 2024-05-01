@@ -1,16 +1,16 @@
-import { siteConfig } from "./config";
+import { siteConfig } from "@/app/config";
 import { Grid, Sidebar } from "@/app/components";
 import { einaLight } from "@/app/config/fonts";
 import { fetchBlogPosts } from "@/contentful/lib";
 import { draftMode } from "next/headers";
 
-interface HomePageProps {
-  params: {
-    category: string;
-  };
+export async function generateStaticParams() {
+  const categories = await fetchBlogPosts({ preview: false });
+
+  return categories;
 }
 
-export default async function Home({ params }: Readonly<HomePageProps>) {
+export default async function Home() {
   const blogPosts = await fetchBlogPosts({ preview: draftMode().isEnabled });
 
   return (
@@ -18,7 +18,7 @@ export default async function Home({ params }: Readonly<HomePageProps>) {
     <main className="container mx-auto mb-10">
       {/* Blog homepage heading */}
       <h1
-        className={`text-5xl mb-10 mt-20 mx-4 eina-light ${einaLight.className} font-normal`}
+        className={`text-5xl mb-10 mt-20 mx-4 eina-light ${einaLight.className} font-light`}
       >
         Blog
       </h1>
@@ -33,7 +33,7 @@ export default async function Home({ params }: Readonly<HomePageProps>) {
         {/* Grid of articles */}
         <Grid blogPosts={blogPosts} />
         {/* Sidebar */}
-        <Sidebar params={params} />
+        <Sidebar />
       </div>
     </main>
   );

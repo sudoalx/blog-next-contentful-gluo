@@ -11,7 +11,7 @@ const nextConfig = {
                 hostname: 'images.ctfassets.net'
             }
         ]
-    }
+    },
 };
 
 export default nextConfig;
