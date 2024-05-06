@@ -28,7 +28,7 @@ export async function fetchNavbarMenu(): Promise<NavbarMenu[]> {
     }); // Fetch the Main Menu
 
   if (!navbarMenuResult.items.length) {
-    return [];contentfulClient;
+    return [];
   }
 
   return navbarMenuResult.items.map((menu) => {
