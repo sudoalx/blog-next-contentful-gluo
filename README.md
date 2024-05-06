@@ -35,8 +35,8 @@ This repository hosts the source code for the company's development blog, aimed 
 3. Set up your Contentful account for content management. And use the provided `.env.example` file to create a `.env.local` file with your Contentful credentials.
 
     ```bash
-    NEXT_PUBLIC_CONTENTFUL_SPACE_ID=
-    NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=
+    CONTENTFUL_SPACE_ID=
+    CONTENTFUL_ACCESS_TOKEN=
     ```
 
 4. Start the development server.

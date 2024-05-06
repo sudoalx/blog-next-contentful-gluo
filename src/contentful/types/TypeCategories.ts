@@ -1,7 +1,7 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
 export interface TypeCategoriesFields {
-    category: EntryFieldTypes.Symbol<"Backend" | "Cloud computing" | "Frameworks" | "Frontend" | "General">;
+    category: EntryFieldTypes.Symbol<"backend" | "cloud computing" | "frameworks" | "frontend" | "general">;
 }
 
 export type TypeCategoriesSkeleton = EntrySkeletonType<TypeCategoriesFields, "categories">;

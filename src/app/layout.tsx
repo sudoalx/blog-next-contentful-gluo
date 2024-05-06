@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer, Navbar } from "./components";
+import { Footer } from "./components";
 import { eina } from "./config/fonts";
 import { siteConfig } from "@/app/config";
+import { Navigation } from "./components/global/navigation/Navigation";
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={eina.className}>
-        <Navbar />
+        <Navigation />
         {children}
         <Footer />
       </body>

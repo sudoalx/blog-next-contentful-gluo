@@ -15,5 +15,5 @@ export const contentfulLoader = ({ src, width, quality }: ImageLoaderProps) => {
 
 export const ContentfulImage = async (props: NextImageProps) => {
   const { src, ...rest } = props;
-  return <Image src={`https:${props.src}`} {...rest} />;
+  return <Image src={`https:${props.src}`} {...rest} alt={props.alt} />;
 };

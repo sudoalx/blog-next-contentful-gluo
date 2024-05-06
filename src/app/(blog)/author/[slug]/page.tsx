@@ -66,6 +66,7 @@ export default async function AuthorPage({
         <Image
           {...author.photo!} // Spread the properties of author.photo directly into the Image component
           src={`https:${author.photo?.src}`} // Assuming `src` is a string representing the image URL
+          alt={author.fullName ?? "Author profile picture"}
           className="rounded-full w-36 h-36"
         />
 
