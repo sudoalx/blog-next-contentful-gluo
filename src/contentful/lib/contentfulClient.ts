@@ -1,15 +1,15 @@
 import { createClient } from "contentful";
 
 const {
-  NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-  NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+  CONTENTFUL_SPACE_ID,
+  CONTENTFUL_ACCESS_TOKEN,
+  CONTENTFUL_PREVIEW_ACCESS_TOKEN,
 } = process.env;
 
 if (
-  !NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
-  !NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ||
-  !NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN
+  !CONTENTFUL_SPACE_ID ||
+  !CONTENTFUL_ACCESS_TOKEN ||
+  !CONTENTFUL_PREVIEW_ACCESS_TOKEN
 ) {
   throw new Error("Contentful environment variables are not set");
 }
@@ -17,15 +17,15 @@ if (
 // This is the standard Contentful client. It fetches
 // content that has been published.
 const client = createClient({
-  space: NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  accessToken: NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+  space: CONTENTFUL_SPACE_ID,
+  accessToken: CONTENTFUL_ACCESS_TOKEN,
 });
 
 // This is a Contentful client that's been configured
 // to fetch drafts and unpublished content.
 const previewClient = createClient({
-  space: NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  accessToken: NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN,
+  space: CONTENTFUL_SPACE_ID,
+  accessToken: CONTENTFUL_PREVIEW_ACCESS_TOKEN,
   host: "preview.contentful.com",
 });
 
