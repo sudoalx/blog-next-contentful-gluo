@@ -10,9 +10,27 @@ export const Footer = () => {
         <div>
           <h4 className="text-xl mb-4">Follow us on</h4>
           <div className="mb-4 flex items-center gap-4">
-            <FaInstagram className="inline-block text-3xl text-red-500" />
-            <FaLinkedinIn className="inline-block text-3xl text-blue-500 " />
-            <FaYoutube className="inline-block text-3xl text-red-500 " />
+            <a
+              href="https://www.instagram.com/gluo_/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaInstagram className="inline-block text-3xl text-red-500" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/gluo/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaLinkedinIn className="inline-block text-3xl text-blue-500 " />
+            </a>
+            <a
+              href="https://www.youtube.com/@gluo7453/videos"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaYoutube className="inline-block text-3xl text-red-500 " />
+            </a>
           </div>
         </div>
 
